@@ -1,12 +1,64 @@
-import { Link } from "react-router";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router";
+import validateForm from "../utils/validateForm";
+import userServices from "../services/userServices";
 
 export default function Register() {
+    const navigate = useNavigate();
+    const [disableSubmit, setDisableSubmit] = useState(false);
+    const [error, setError] = useState("");
+    const [formValues, setFormValues] = useState({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      repeatPassword: "",
+  });
+    
+
+    const submitAction = async (e) => {
+      e.preventDefault();
+      setDisableSubmit(true);
+
+      const userData = await userServices.getAllUsers();
+      const users = Object.values(userData);
+
+      if(users.some(user => user.email === formValues.email)){
+        setError("A user with this email already exists");
+        setDisableSubmit(false);
+        return;
+      }
+
+      const errors = validateForm(formValues);
+      if(errors.length > 0){
+        setError(errors.join(" "));
+        setDisableSubmit(false);
+        return;
+      }
+      setError("")
+
+      try { 
+        await userServices.createUser(formValues)
+        setFormValues({ firstName: "", lastName: "", email: "", password: "", repeatPassword: "" });
+        navigate("/login")
+      } catch (error) {
+        setError(err.message)
+      }
+      setDisableSubmit(false)
+    }
+
+    const handleFormChange = (e) => {
+      setFormValues(state => ({...state, [e.target.name]: e.target.value}))
+    }
+
     return (
-      <div className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-gray-100">
+      <div className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-gray-100 pt-30 pb-30">
         <div className="max-w-lg w-full bg-white shadow-lg rounded-lg p-8">
           <h1 className="text-3xl font-semibold text-center text-gray-800 mb-6">Register</h1>
+
+          {error && <p className="text-red-500 text-center mb-4">{error}</p>}
           
-          <form className="space-y-8">
+          <form onSubmit={submitAction} className="space-y-8">
             <div>
               <label htmlFor="firstName" className="block text-gray-700 font-medium mb-2">
                 First Name
@@ -14,8 +66,11 @@ export default function Register() {
               <input
                 type="text"
                 name="firstName"
+                onChange={handleFormChange}
+                value={formValues.firstName}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter your First Name"
+                required
               />
             </div>
             <div>
@@ -25,6 +80,8 @@ export default function Register() {
                 <input 
                     type="text" 
                     name="lastName" 
+                    onChange={handleFormChange}
+                    value={formValues.lastName}
                     className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Enter your Last Name"
                 />
@@ -36,8 +93,11 @@ export default function Register() {
                 <input 
                 type="email"
                 name="email"
+                onChange={handleFormChange}
+                value={formValues.email}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="youremail@mail.com"
+                required
                 />
             </div>
             <div>
@@ -47,26 +107,33 @@ export default function Register() {
                 <input 
                 type="password"
                 name="password"
+                onChange={handleFormChange}
+                value={formValues.password}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter a password"
+                required
                 />
             </div>
             <div>
                 <label htmlFor="repeatPassword" className="block text-gray-700 font-medium mb-2">
-                    Password
+                    Confirm Password
                 </label>
                 <input 
                 type="password"
                 name="repeatPassword"
+                onChange={handleFormChange}
+                value={formValues.repeatPassword}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Confirm password"
+                required
                 />
             </div>
   
             <div>
               <button
                 type="submit"
-                className="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 cursor-pointer"
+                disabled={disableSubmit}
+                className="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
                 Register
               </button>
