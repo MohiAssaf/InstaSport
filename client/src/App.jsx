@@ -8,25 +8,28 @@ import Contact from './pages/Contact'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Footer from './components/Footer'
+import { AuthProvider } from './context/AuthContext'
 
 function App() {
   
 
   return (
-    <div className="flex flex-col min-h-screen">
-    <Header />
-    
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/athletes' element={<Athletes />} />
-        <Route path='/posts' element={<Posts />} />
-        <Route path='/contact' element={<Contact />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-      </Routes>
+    <AuthProvider>
+      <div className="flex flex-col min-h-screen">
+        <Header />
+        
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/athletes' element={<Athletes />} />
+            <Route path='/posts' element={<Posts />} />
+            <Route path='/contact' element={<Contact />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+          </Routes>
 
-    <Footer />
-  </div>
+        <Footer />
+      </div>
+    </AuthProvider>
   )
 }
 

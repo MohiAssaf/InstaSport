@@ -2,8 +2,10 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import validateForm from "../utils/validateForm";
 import userServices from "../services/userServices";
+import { useAuth } from "../context/AuthContext";
 
 export default function Register() {
+    const {login} = useAuth();
     const navigate = useNavigate();
     const [disableSubmit, setDisableSubmit] = useState(false);
     const [error, setError] = useState("");
@@ -38,9 +40,14 @@ export default function Register() {
       setError("")
 
       try { 
-        await userServices.createUser(formValues)
-        setFormValues({ firstName: "", lastName: "", email: "", password: "", repeatPassword: "" });
-        navigate("/login")
+        const newUser = await userServices.createUser({
+          firstName: formValues.firstName,
+          lastName: formValues.lastName,
+          email: formValues.email,
+          password: formValues.password, 
+        });
+        login(newUser._id)
+        navigate("/")
       } catch (error) {
         setError(err.message)
       }
@@ -98,6 +105,8 @@ export default function Register() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="youremail@mail.com"
                 required
+                autoComplete="new-email"
+
                 />
             </div>
             <div>
@@ -112,6 +121,7 @@ export default function Register() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter a password"
                 required
+                autoComplete="new-password"
                 />
             </div>
             <div>
@@ -126,6 +136,7 @@ export default function Register() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Confirm password"
                 required
+                autoComplete="new-password"
                 />
             </div>
   

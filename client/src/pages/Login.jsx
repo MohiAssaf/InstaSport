@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import userServices from "../services/userServices";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login(){
+    const { login } = useAuth();
     const navigation = useNavigate();
     const [error, setError] = useState("");
     const [disableSubmit, setDisableSubmit] = useState(false);
@@ -24,13 +26,15 @@ export default function Login(){
         const userData = await userServices.getAllUsers();
         const users = Object.values(userData);
         const user = users.find(user => user.email === formValues.email && user.password === formValues.password)
-  
+        console.log(user)
         if(!user){
           setError("Invalid email or password");
           setDisableSubmit(false);
           return;
         }
+
         setDisableSubmit(false)
+        login(user._id)
         navigation("/")
       } catch (error) {
         setError(error.message)
@@ -57,6 +61,7 @@ export default function Login(){
                   className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Enter your email"
                   required
+                  autoComplete="email"
                 />
               </div>
               <div>
@@ -71,6 +76,7 @@ export default function Login(){
                       className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       placeholder="Enter your password"
                       required
+                      autoComplete="password"
                   />
               </div>
     
