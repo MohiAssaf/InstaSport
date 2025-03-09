@@ -2,18 +2,18 @@ import { useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router';
+import { useAuth } from '../context/AuthContext';
 
 const navigation = [
   { name: 'Home', path: '/' },
   { name: 'Athletes', path: '/athletes' },
-  { name: 'Posts', path: '/posts' },
-  { name: 'Contact', path: '/contact' },
+  { name: 'Catalog', path: '/catalog' },
+  { name: 'About', path: '/about' },
 ]
-
-
 
 export default function Navigation(){
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const { isAuthenticated } = useAuth();
     
     return(
         <>
@@ -27,9 +27,9 @@ export default function Navigation(){
             />
           </Link>
           <h1 className="text-xl font-semibold text-gray-800">
-          Sport 
-          <span className="text-xl ml-1 font-semibold text-blue-400 hover:text-blue-600 transition-colors duration-300">
-             Reviews
+            Insta 
+          <span className="text-xl font-semibold text-blue-400 hover:text-blue-600 transition-colors duration-300">
+            Sport
           </span>       
           </h1>
         </div>
@@ -51,9 +51,16 @@ export default function Navigation(){
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link to="/login" className="text-sm/6 font-semibold text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
+
+          {isAuthenticated ?
+          <Link to="/profile" className="p-3 border-4 rounded-full border-blue-500 cursor-pointer hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in-out">
+            <i className="fa-solid fa-user"></i> 
           </Link>
+          :
+          <Link to="/login" className="text-sm/6 font-semibold text-gray-900">
+          Log in <span aria-hidden="true">&rarr;</span>
+          </Link>  
+        }
         </div>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
@@ -90,12 +97,15 @@ export default function Navigation(){
                 ))}
               </div>
               <div className="py-6">
-                <Link
-                  to="/login"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-                >
-                  Log in
+              {isAuthenticated ?
+                <Link to="/profile" className="p-3 border-4 rounded-full border-blue-500 cursor-pointer hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in-out">
+                  <i className="fa-solid fa-user"></i> 
                 </Link>
+                :
+                <Link to="/login" className="text-sm/6 font-semibold text-gray-900">
+                Log in <span aria-hidden="true">&rarr;</span>
+                </Link>  
+              }
               </div>
             </div>
           </div>
