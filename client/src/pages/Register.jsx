@@ -59,7 +59,7 @@ export default function Register() {
     }
 
     return (
-      <div className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-gray-100 pt-30 pb-30">
+      <div className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-gray-200 pt-50 pb-30">
         <div className="max-w-lg w-full bg-white shadow-lg rounded-lg p-8">
           <h1 className="text-3xl font-semibold text-center text-gray-800 mb-6">Register</h1>
 

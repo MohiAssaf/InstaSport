@@ -26,7 +26,7 @@ export default function Login(){
         const userData = await userServices.getAllUsers();
         const users = Object.values(userData);
         const user = users.find(user => user.email === formValues.email && user.password === formValues.password)
-        console.log(user)
+
         if(!user){
           setError("Invalid email or password");
           setDisableSubmit(false);
@@ -38,11 +38,12 @@ export default function Login(){
         navigation("/")
       } catch (error) {
         setError(error.message)
+        setDisableSubmit(false)
       }
 
     }
     return (
-        <div className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-gray-100">
+        <div className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-gray-200">
           <div className="max-w-lg w-full bg-white shadow-lg rounded-lg p-8">
             <h1 className="text-3xl font-semibold text-center text-gray-800 mb-6">Login</h1>
 
