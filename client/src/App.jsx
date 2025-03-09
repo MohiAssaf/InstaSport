@@ -1,4 +1,4 @@
-import './App.css'
+import './index.css'
 import Athletes from './pages/Athletes'
 import Header from './components/Header'
 import Home from './pages/Home'
