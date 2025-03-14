@@ -1,4 +1,6 @@
-import SubmitButton from "./SubmitButton";
+import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import catalogServices from "../../services/catalogServices";
 
 const sportTypes = [
     "Football",
@@ -14,22 +16,45 @@ const sportTypes = [
   ];
     
 
-const CreatePost = ({close}) => {
+const CreatePost = () => {
+    const {user} = useAuth();
+    const [error, setError] = useState("");
+
     const formSubmit = async (formData) => {
-        const title = formData.get("postTitle")
+        const errors = [];
+        const image = formData.get("postImg");
+        const sportType = formData.get("postSport");
+
+        if(!/^(https?:\/\/).*\.(jpg|png|jgeg)$/i.test(image)){
+            errors.push("Invalid Image URL");
+        }
+
+        if(sportType === "none"){
+            errors.push("Please choose a sport type");
+        }
+
+        if(errors){
+            setError(errors.join(" "))
+            setTimeout(() => {
+                setError("")
+            }, 2000)
+            return;
+        }
+
+        const data = Object.fromEntries(formData);
+        console.log(data)
+        await catalogServices.createPost(data, user);
 
     }
 
 
     return (
-        <div className="fixed inset-0 bg-opacity-30 backdrop-blur-sm flex justify-center items-center z-50">
-            <div className="fixed inset-0" onClick={close}></div>
-            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg relative">
+        <div className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-gray-200">
+            <div className="max-w-lg w-full bg-white shadow-lg rounded-lg p-8">
                     <h1 className="text-3xl font-bold text-center mb-4">Create Post</h1>
-                    <button className="absolute top-4 right-5 cursor-pointer" onClick={close}>
-                        <i className="fa-solid fa-circle-xmark text-2xl text-red-500 transition-colors hover:text-red-400"></i>
-                    </button>
-                    <form action={formSubmit} className="space-y-4">
+
+                    {error && <p className="text-red-500 text-center mb-4">{error}</p> }
+                    <form id="create" action={formSubmit} className="space-y-4">
                         <div>
                             <label 
                             htmlFor="postTitle"
@@ -40,6 +65,7 @@ const CreatePost = ({close}) => {
                             <input 
                             type="text" 
                             name="postTitle" 
+                            placeholder="Enter the title of your post"
                             className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             required
                             />
@@ -69,6 +95,7 @@ const CreatePost = ({close}) => {
                             </label>
                             <textarea
                             name="postDesc"
+                            placeholder="A brief description of the post"
                             className="w-full min-h-[140px] resize-none px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             >
                             </textarea> 
@@ -82,14 +109,21 @@ const CreatePost = ({close}) => {
                             </label>
 
                             <select name="postSport" className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-md">
+                                <option key="none" value="none">------</option>
                                 {sportTypes.map(sport => (
-                                    <option value={sport}>{sport}</option>
+                                    <option key={sport} value={sport}>{sport}</option>
                                 ))}
                             </select>
                         </div>
 
                         <div>
-                            <SubmitButton postType="Create"/>
+                        <button
+                            type="submit"
+                            //disabled={pending}
+                            className="px-10 py-2 text-xl text-white bg-blue-600 rounded-lg cursor-pointer hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                            >
+                            Create
+                        </button>
                         </div>
                     </form>
                 </div>

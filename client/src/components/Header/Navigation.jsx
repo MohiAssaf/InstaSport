@@ -2,12 +2,13 @@ import { useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 
 const navigation = [
   { name: 'Home', path: '/' },
   { name: 'Athletes', path: '/athletes' },
   { name: 'Catalog', path: '/catalog' },
+  { name: 'Create Post', path: '/catalog/create' },
   { name: 'About', path: '/about' },
 ]
 
