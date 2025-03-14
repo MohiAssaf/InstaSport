@@ -1,6 +1,6 @@
 import './index.css'
 import Athletes from './pages/Athletes'
-import Header from './components/Header'
+import Header from './components//Header/Header'
 import Home from './pages/Home'
 import { Routes, Route } from 'react-router'
 import { AuthProvider } from './context/AuthContext'
@@ -8,11 +8,12 @@ import Catalog from './pages/Catalog'
 import About from './pages/About'
 import Login from './pages/Login'
 import Register from './pages/Register'
-import Footer from './components/Footer'
+import Footer from './components/Footer/Footer'
 import Profile from './pages/Profile'
 import ProtectedRoute from './routes/ProtectedRoute'
 import UnprotectedRoute from './routes/UnprotectedRoute'
 import NotFound from './pages/NotFound'
+import CreatePost from './components/CreatePost/CreatePost'
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
               <Route path='/profile' element={<Profile/>} />
               <Route path='/athletes' element={<Athletes />} />
               <Route path='/catalog' element={<Catalog />} />
+              <Route path='/catalog/create' element={<CreatePost />} />
             </Route>
 
             <Route path='*' element={<NotFound />}/>
