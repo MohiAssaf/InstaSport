@@ -6,7 +6,11 @@ export default {
     async getAllUsers(){
         return requester.get(baseUrl)
     },
+    async getOne(id){
+        return requester.get(`${baseUrl}/${id}`)
+    },
     async createUser(userData){
-        return requester.post(userData)
+        console.log(userData)
+        return requester.post(baseUrl, userData)
     },
 }
