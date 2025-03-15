@@ -2,54 +2,33 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import validateForm from "../utils/validateForm";
 import userServices from "../services/userServices";
+import SubmitButton from "../components/SubmitButton/SubmitButton";
 
 export default function Register() {
     const navigate = useNavigate();
-    const [disableSubmit, setDisableSubmit] = useState(false);
     const [error, setError] = useState("");
-    const [formValues, setFormValues] = useState({
-      firstName: "",
-      lastName: "",
-      email: "",
-      profileImg: "",
-      password: "",
-      repeatPassword: "",
-  });
     
 
-    const submitAction = async (e) => {
-      e.preventDefault();
-      setDisableSubmit(true);
+    const submitAction = async (formData) => {
+      const data = Object.fromEntries(formData);
 
       const userData = await userServices.getAllUsers();
       const users = Object.values(userData);
 
-      if(users.some(user => user.email === formValues.email)){
-        setError("A user with this email already exists");
-        setDisableSubmit(false);
+      if(users.some(user => user.username === data.username)){
+        setError("A user with this username already exists");
         return;
       }
 
-      const errors = validateForm(formValues);
+      const errors = validateForm(data);
       if(errors.length > 0){
         setError(errors.join(" "));
-        setDisableSubmit(false);
         return;
       }
       setError("")
+      await userServices.createUser(data);
+      navigate("/login")
 
-      try { 
-        await userServices.createUser(formValues);
-        navigate("/login")
-      } catch (error) {
-        setError(error.message)
-        setDisableSubmit(false)
-      }
-      setDisableSubmit(false)
-    }
-
-    const handleFormChange = (e) => {
-      setFormValues(state => ({...state, [e.target.name]: e.target.value}))
     }
 
     return (
@@ -59,7 +38,7 @@ export default function Register() {
 
           {error && <p className="text-red-500 text-center mb-4">{error}</p>}
           
-          <form onSubmit={submitAction} className="space-y-8">
+          <form action={submitAction} className="space-y-8">
             <div>
               <label htmlFor="firstName" className="block text-gray-700 font-medium mb-2">
                 First Name
@@ -67,8 +46,6 @@ export default function Register() {
               <input
                 type="text"
                 name="firstName"
-                onChange={handleFormChange}
-                value={formValues.firstName}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter your First Name"
                 required
@@ -81,26 +58,21 @@ export default function Register() {
                 <input 
                     type="text" 
                     name="lastName" 
-                    onChange={handleFormChange}
-                    value={formValues.lastName}
                     className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Enter your Last Name"
                 />
             </div>
             <div>
-                <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
-                    Email
+                <label htmlFor="username" className="block text-gray-700 font-medium mb-2">
+                    Username
                 </label>
                 <input 
-                type="email"
-                name="email"
-                onChange={handleFormChange}
-                value={formValues.email}
+                type="text"
+                name="username"
                 className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="youremail@mail.com"
+                placeholder="Enter a username"
+                autoComplete="new-username"
                 required
-                autoComplete="new-email"
-
                 />
             </div>
             <div>
@@ -124,12 +96,10 @@ export default function Register() {
                 <input 
                 type="password"
                 name="password"
-                onChange={handleFormChange}
-                value={formValues.password}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter a password"
-                required
                 autoComplete="new-password"
+                required
                 />
             </div>
             <div>
@@ -139,23 +109,15 @@ export default function Register() {
                 <input 
                 type="password"
                 name="repeatPassword"
-                onChange={handleFormChange}
-                value={formValues.repeatPassword}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Confirm password"
-                required
                 autoComplete="new-password"
+                required
                 />
             </div>
   
-            <div>
-              <button
-                type="submit"
-                disabled={disableSubmit}
-                className="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
-              >
-                Register
-              </button>
+            <div className="flex justify-center">
+              <SubmitButton btnText="Register" /> 
             </div>
           </form>
   
