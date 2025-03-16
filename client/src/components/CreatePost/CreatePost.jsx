@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import catalogServices from "../../services/catalogServices";
 import { useNavigate } from "react-router";
@@ -21,30 +20,8 @@ const sportTypes = [
 const CreatePost = () => {
     const {user} = useAuth();
     const nav = useNavigate();
-    const [error, setError] = useState("");
 
     const formAction = async (formData) => {
-        const errors = [];
-        const image = formData.get("imageUrl");
-        const sportType = formData.get("sportType");
-        
-
-        if(!/^(https?:\/\/).*\.(jpg|png|jgeg)$/i.test(image)){
-            errors.push("Invalid Image URL");
-        }
-
-        if(sportType === "none"){
-            errors.push("Please choose a sport type");
-        }
-
-        if(errors.length > 0){
-                setError(errors.join(" "))
-            setTimeout(() => {
-                setError("")
-            }, 2000)
-            return;
-        }
-
         const data = Object.fromEntries(formData);
         await catalogServices.create(data, user);
         nav("/catalog")
@@ -57,7 +34,6 @@ const CreatePost = () => {
             <div className="max-w-lg w-full bg-white shadow-lg rounded-lg p-8">
                     <h1 className="text-3xl font-bold text-center mb-4">Create Post</h1>
 
-                    {error && <p className="text-red-500 text-center mb-4">{error}</p> }
                     <form className="space-y-4" action={formAction}>
                         <div>
                             <label 
@@ -83,7 +59,7 @@ const CreatePost = () => {
                                 Image
                             </label>
                             <input 
-                            type="text" 
+                            type="url" 
                             name="imageUrl" 
                             placeholder="Paste an image URL..."
                             className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -112,8 +88,8 @@ const CreatePost = () => {
                                 Sport Type
                             </label>
 
-                            <select name="sportType" className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-md">
-                                <option key="none" value="none">------</option>
+                            <select name="sportType" className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-md" required>
+                                <option key="none" value="">------</option>
                                 {sportTypes.map(sport => (
                                     <option key={sport} value={sport}>{sport}</option>
                                 ))}
