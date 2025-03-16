@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 import userServices from "../services/userServices";
@@ -27,16 +27,16 @@ const Profile = () => {
             />
           </div>
 
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-2">
-            {data?.firstName} {data?.lastName}
+          <h2 className="text-gray-600 mb-4">
+            Name: <span className="text-black text-2xl">{data?.firstName} {data?.lastName}</span>
           </h2>
 
-          <p className="text-center text-gray-600 mb-4">{data?.email}</p>
+          <p className="text-gray-600 mb-4">Username: <span className="text-black text-2xl">{data?.username}</span></p>
 
           <div className="flex justify-evenly items-center mt-6">
-            <button className="px-8 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300 cursor-pointer">
+            <Link to={`/profile/edit/${data._id}`} className="px-8 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300 cursor-pointer">
               Edit
-            </button>
+            </Link>
             
             <button type="submit" onClick={() => {
               logout()

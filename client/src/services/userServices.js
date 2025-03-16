@@ -9,8 +9,10 @@ export default {
     async getOne(id){
         return requester.get(`${baseUrl}/${id}`)
     },
-    async createUser(userData){
-        console.log(userData)
+    async create(userData){
         return requester.post(baseUrl, userData)
+    },
+    async update(userData, id){
+        return requester.put(`${baseUrl}/${id}`, userData)
     },
 }
