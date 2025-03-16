@@ -14,6 +14,8 @@ import ProtectedRoute from './routes/ProtectedRoute'
 import UnprotectedRoute from './routes/UnprotectedRoute'
 import NotFound from './pages/NotFound'
 import CreatePost from './components/CreatePost/CreatePost'
+import DetailsPost from './components/DetailsPost/DetailsPost'
+import EditProfile from './components/EditProfile/EditProfile'
 
 function App() {
 
@@ -26,6 +28,7 @@ function App() {
 
             <Route path='/' element={<Home />} />
             <Route path='/about' element={<About />} />
+            <Route path='/catalog' element={<Catalog />} />
 
             <Route element={<UnprotectedRoute/>}>
               <Route path='/login' element={<Login />} />
@@ -34,9 +37,10 @@ function App() {
 
             <Route element={<ProtectedRoute/>}>              
               <Route path='/profile' element={<Profile/>} />
+              <Route path='/profile/edit/:id' element={<EditProfile/>} />
               <Route path='/athletes' element={<Athletes />} />
-              <Route path='/catalog' element={<Catalog />} />
               <Route path='/catalog/create' element={<CreatePost />} />
+              <Route path='/catalog/details/:id' element={<DetailsPost/>}/>
             </Route>
 
             <Route path='*' element={<NotFound />}/>
