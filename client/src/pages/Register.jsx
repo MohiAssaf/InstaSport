@@ -1,33 +1,36 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import validateForm from "../utils/validateForm";
-import userServices from "../services/userServices";
+import validatePassword from "../utils/validatePassword";
 import SubmitButton from "../components/SubmitButton/SubmitButton";
+import { useRegister } from "../api/authApi";
+import { useAuth } from "../context/AuthContext";
 
 export default function Register() {
     const navigate = useNavigate();
+    const {register} = useRegister();
+    const {setAccessToken} = useAuth();
     const [error, setError] = useState("");
     
 
     const submitAction = async (formData) => {
       const data = Object.fromEntries(formData);
+      const errors = validatePassword(data);
 
-      const userData = await userServices.getAllUsers();
-      const users = Object.values(userData);
+      try {
+        const response = await register(data);
+        if(!response.accessToken){
+          errors.push(response.message)
+          setError(errors.join(" "));
+          setTimeout(() => setError(""), 3000);
+          return
+        }
 
-      if(users.some(user => user.username === data.username)){
-        setError("A user with this username already exists");
-        return;
+        setAccessToken(response.accessToken);
+        navigate("/");
+
+      } catch (e) {
+        setError("Something went wrong. Please try again later.");
       }
-
-      const errors = validateForm(data);
-      if(errors.length > 0){
-        setError(errors.join(" "));
-        return;
-      }
-      setError("")
-      await userServices.createUser(data);
-      navigate("/login")
 
     }
 
@@ -60,6 +63,19 @@ export default function Register() {
                     name="lastName" 
                     className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Enter your Last Name"
+                />
+            </div>
+            <div>
+                <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
+                    Email
+                </label>
+                <input 
+                    type="email" 
+                    name="email" 
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Enter your email"
+                    autoComplete="new-email"
+                    required
                 />
             </div>
             <div>

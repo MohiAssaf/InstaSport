@@ -1,27 +1,32 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import userServices from "../services/userServices";
 import { useAuth } from "../context/AuthContext";
 import SubmitButton from "../components/SubmitButton/SubmitButton";
+import { useLogin } from "../api/authApi";
 
 export default function Login(){
-    const { login } = useAuth();
-    const navigation = useNavigate();
+    const {login} = useLogin();
+    const {setAccessToken} = useAuth()
+    const navigate = useNavigate();
     const [error, setError] = useState("");
 
     const submitAction = async (formData) => {
       const data = Object.fromEntries(formData);
-      const allUsers = await userServices.getAllUsers();
 
-      const user = Object.values(allUsers).find(user => user.username === data.username && user.password === data.password)
+      try {
+        const response = await login(data);
+        if(!response.accessToken){
+          setError(response.message);
+          setTimeout(() => setError(""), 3000);
+          return
+        }
+        
+        setAccessToken(response.accessToken);
+        navigate("/");
 
-      if(!user){
-        setError("Invalid username or password");
-        return;
+      } catch (e) {
+        setError("Something went wrong. Please try again later.");
       }
-
-      login(user._id)
-      navigation("/")
 
     }
     return (
@@ -33,15 +38,15 @@ export default function Login(){
             
             <form action={submitAction} className="space-y-8">
               <div>
-                  <label htmlFor="username" className="block text-gray-700 font-medium mb-2">
-                      Username
+                  <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
+                      Email
                   </label>
                   <input 
-                  type="text"
-                  name="username"
+                  type="email"
+                  name="email"
                   className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="Enter a username"
-                  autoComplete="username"
+                  placeholder="Enter a email"
+                  autoComplete="email"
                   required
                   />
               </div>
