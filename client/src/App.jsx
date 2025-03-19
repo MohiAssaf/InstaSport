@@ -1,5 +1,4 @@
 import './index.css'
-import Athletes from './pages/Athletes'
 import Header from './components//Header/Header'
 import Home from './pages/Home'
 import { Routes, Route } from 'react-router'
@@ -38,7 +37,6 @@ function App() {
             <Route element={<ProtectedRoute/>}>              
               <Route path='/profile' element={<Profile/>} />
               <Route path='/profile/edit/:id' element={<EditProfile/>} />
-              <Route path='/athletes' element={<Athletes />} />
               <Route path='/catalog/create' element={<CreatePost />} />
               <Route path='/catalog/details/:id' element={<DetailsPost/>}/>
             </Route>

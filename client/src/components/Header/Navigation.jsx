@@ -27,7 +27,6 @@ export default function Navigation(){
         <div className="hidden lg:flex lg:gap-x-12">
 
           <Link key="home" to="/" className="text-sm/6 font-semibold text-gray-900">Home</Link>
-          <Link key="athletes" to="/athletes" className="text-sm/6 font-semibold text-gray-900">Athletes</Link>
           <Link key="catalog" to="/catalog" className="text-sm/6 font-semibold text-gray-900">Catalog</Link>
           {isAuthenticated &&
           <Link key="catalog-create" to="/catalog/create" className="text-sm/6 font-semibold text-gray-900">Create Post</Link>
