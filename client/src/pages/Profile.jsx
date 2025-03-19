@@ -1,19 +1,10 @@
 import { Link, useNavigate } from "react-router";
-import { useAuth } from "../context/AuthContext";
-import { useEffect, useState } from "react";
-import userServices from "../services/userServices";
+import { useLogout, useUser } from "../api/authApi";
 
 const Profile = () => {
-    const {user, logout} = useAuth();
+    const {logout} = useLogout()
+    const {user} = useUser()
     const navigation = useNavigate();
-
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-      userServices.getOne(user)
-      .then(setData)
-    }, [user])
-    
 
     return (
       <div className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-gray-100">      
@@ -21,20 +12,20 @@ const Profile = () => {
           
           <div className="flex justify-center mb-6">
             <img 
-              src={data?.profileImg ? data.profileImg: "https://brsc.sa.edu.au/wp-content/uploads/2018/09/placeholder-profile-sq.jpg"} 
+              src={user?.profileImg ? user.profileImg: "https://brsc.sa.edu.au/wp-content/uploads/2018/09/placeholder-profile-sq.jpg"} 
               alt="Profile Picture" 
               className="w-32 h-32 rounded-full border-4 border-gray-100 shadow-lg"
             />
           </div>
 
           <h2 className="text-gray-600 mb-4">
-            Name: <span className="text-black text-2xl">{data?.firstName} {data?.lastName}</span>
+            Name: <span className="text-black text-2xl">{user?.firstName} {user?.lastName}</span>
           </h2>
 
-          <p className="text-gray-600 mb-4">Username: <span className="text-black text-2xl">{data?.username}</span></p>
+          <p className="text-gray-600 mb-4">Username: <span className="text-black text-2xl">{user?.username}</span></p>
 
           <div className="flex justify-evenly items-center mt-6">
-            <Link to={`/profile/edit/${data._id}`} className="px-8 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300 cursor-pointer">
+            <Link to={`/profile/edit/${user._id}`} className="px-8 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300 cursor-pointer">
               Edit
             </Link>
             
