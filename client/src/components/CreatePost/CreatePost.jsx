@@ -1,7 +1,8 @@
-import { useAuth } from "../../context/AuthContext";
 import catalogServices from "../../services/catalogServices";
 import { useNavigate } from "react-router";
 import SubmitButton from "../SubmitButton/SubmitButton";
+import { useAuth } from "../../hooks/useAuthorization";
+import { useCreatePost } from "../../api/catalogApi";
 
 const sportTypes = [
     "Football",
@@ -18,12 +19,12 @@ const sportTypes = [
     
 
 const CreatePost = () => {
-    const {user} = useAuth();
+    const {createPost} = useCreatePost()
     const nav = useNavigate();
 
     const formAction = async (formData) => {
         const data = Object.fromEntries(formData);
-        await catalogServices.create(data, user);
+        await createPost(data);
         nav("/catalog")
 
     }
