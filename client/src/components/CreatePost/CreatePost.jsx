@@ -1,7 +1,5 @@
-import catalogServices from "../../services/catalogServices";
 import { useNavigate } from "react-router";
 import SubmitButton from "../SubmitButton/SubmitButton";
-import { useAuth } from "../../hooks/useAuthorization";
 import { useCreatePost } from "../../api/catalogApi";
 
 const sportTypes = [
