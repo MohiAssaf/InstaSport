@@ -1,14 +1,8 @@
-import { useEffect, useState } from 'react';
-import catalogServices from '../services/catalogServices';
 import PostCard from '../components/PostCard/PostCard';
+import { usePosts } from '../api/catalogApi';
 
 export default function Catalog() {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    catalogServices.getAll()
-      .then(response => setPosts(Object.values(response)));
-  }, []);
+  const {posts} = usePosts()
 
   return (
     <div className="relative min-h-screen bg-gray-100 py-50">
