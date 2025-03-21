@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuthorization";
+import requester from "../utils/requester";
 
 const baseUrl = 'http://localhost:3030/data/posts';
 
@@ -15,6 +16,19 @@ export const usePosts = () => {
 
     return {
         posts
+    }
+}
+
+export const usePost = (postId) => {
+    const [post, setPost] = useState({});
+
+    useEffect(() => {
+        requester.get(`${baseUrl}/${postId}`)
+        .then(setPost)
+    }, [])
+
+    return {
+        post
     }
 }
 
