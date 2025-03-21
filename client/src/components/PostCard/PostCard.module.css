@@ -4,11 +4,33 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease;
-    max-height: 550px;  
+    max-height: 550px;
 }
 
 .postCard:hover {
     transform: scale(1.05);
+}
+
+.detailView {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.104);
+    backdrop-filter: blur(40px);
+    color: black;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.postCard:hover .detailView {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
 }
 
 .postImg {
@@ -44,12 +66,10 @@
     gap: 12px;
 }
 
-.likeContainer, .commentContainer {
+.likeContainer,
+.commentContainer {
     background: none;
     border: none;
     font-size: 16px;
     color: #4a5568;
 }
-
-
-
