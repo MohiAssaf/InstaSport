@@ -1,9 +1,9 @@
 import { Navigate, Outlet } from "react-router";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../hooks/useAuthorization";
 
 const UnprotectedRoute = () => {
     const {isAuthenticated} = useAuth();
-    return !isAuthenticated ? <Outlet/> : <Navigate to="/" />
+    return isAuthenticated ? <Navigate to="/" />: <Outlet/> 
 
 };
 
