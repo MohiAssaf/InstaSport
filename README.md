@@ -16,11 +16,14 @@ This is a sports-focused social media platform, similar to Instagram but exclusi
 ## How to Run the Project
 
 
-### 1. Clone the Repository
+### 1. Clone the Repository and Navigate to the Project Directory
 ```sh
 git clone https://github.com/MohiAssaf/InstaSport.git
 ```
 
+```sh
+cd InstaSport 
+```
 ---
 
 ## Running the Backend (Server)
