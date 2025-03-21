@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { useAuth } from "../context/AuthContext";
+import { useAuthContext } from "../context/AuthContext";
 import SubmitButton from "../components/SubmitButton/SubmitButton";
 import { useLogin } from "../api/authApi";
 
 export default function Login(){
     const {login} = useLogin();
-    const {setAccessToken} = useAuth()
+    const {userLogin} = useAuthContext()
     const navigate = useNavigate();
     const [error, setError] = useState("");
 
@@ -14,14 +14,14 @@ export default function Login(){
       const data = Object.fromEntries(formData);
 
       try {
-        const response = await login(data);
-        if(!response.accessToken){
-          setError(response.message);
+        const result = await login(data);
+        if(!result.accessToken){
+          setError(result.message);
           setTimeout(() => setError(""), 3000);
           return
         }
         
-        setAccessToken(response.accessToken);
+        userLogin(result);
         navigate("/");
 
       } catch (e) {

@@ -1,24 +1,27 @@
-import { useAuth } from "../context/AuthContext"
+import { useAuthContext } from "../context/AuthContext"
 import requester from "../utils/requester"
 
 
-export const useAuthorization = () => {
-    const {token} = useAuth();
+export const useAuth = () => {
+    const userData = useAuthContext()
 
     const requestWrapper = (method, url, data, options={}) => {
 
         const authOptions = {
             ...options,
             headers:{
-                "X-Authorization": token,
+                "X-Authorization": userData.token,
                 ...options.headers
             }
         }
 
-        return requester.baseRequest(method, url, data, token ? authOptions : options)
+        return requester.baseRequest(method, url, data, userData ? authOptions : options)
     }
 
-    return {request: {
+    return {
+        user_id: userData.user_id,
+        isAuthenticated: !!userData.token,
+        request: {
         get: requestWrapper.bind(null, "GET"),
         put: requestWrapper.bind(null, "PUT"),
         post: requestWrapper.bind(null, "POST"),

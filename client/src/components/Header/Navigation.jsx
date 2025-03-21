@@ -1,9 +1,9 @@
 import { Link } from 'react-router';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../hooks/useAuthorization';
 
 
 export default function Navigation(){
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated } = useAuth()
     
     return(
         <>

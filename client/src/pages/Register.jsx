@@ -3,12 +3,12 @@ import { Link, useNavigate } from "react-router";
 import validatePassword from "../utils/validatePassword";
 import SubmitButton from "../components/SubmitButton/SubmitButton";
 import { useRegister } from "../api/authApi";
-import { useAuth } from "../context/AuthContext";
+import { useAuthContext } from "../context/AuthContext";
 
 export default function Register() {
     const navigate = useNavigate();
     const {register} = useRegister();
-    const {setAccessToken} = useAuth();
+    const {userLogin} = useAuthContext();
     const [error, setError] = useState("");
     
 
@@ -16,21 +16,18 @@ export default function Register() {
       const data = Object.fromEntries(formData);
       const errors = validatePassword(data);
 
-      try {
-        const response = await register(data);
-        if(!response.accessToken){
-          errors.push(response.message)
-          setError(errors.join(" "));
-          setTimeout(() => setError(""), 3000);
-          return
-        }
+      const result = await register(data);
 
-        setAccessToken(response.accessToken);
-        navigate("/");
-
-      } catch (e) {
-        setError("Something went wrong. Please try again later.");
+      if(result.message){
+        errors.push(result.message)
+        setError(errors.join(" "));
+        setTimeout(() => setError(""), 3000);
+        return;
       }
+
+      userLogin(result);
+      navigate("/");
+
 
     }
 
