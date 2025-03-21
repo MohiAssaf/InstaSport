@@ -1649,7 +1649,53 @@
     			_createdOn: 1616237272948,
     			_updatedOn: 1616237293676
     		}
-    	}
+    	},
+        posts: {
+            "07f260f4-466c-4607-9a33-f7273b24f1b4": {
+                "_id": "07f260f4-466c-4607-9a33-f7273b24f1b4",
+                "_ownerId": "bdabf5e9-23be-40a1-9f14-9117b6702a9d",
+                "title": "Football match highlights",
+                "description": "Here are the highlights of last night's thrilling football match!",
+                "imageUrl": "https://img.allfootballapp.com/www/M00/1C/A7/720x-/-/-/CgAGVWENTcCAbXbEAAFUuyKYKu8634.jpg",
+                "sportType": "Football",
+                "likesCount": 120,
+                "commentsCount": 5,
+                "_createdOn": 1740823200000,
+            },
+            "07f260f4-466c-4607-9a33-f7d23b24f1b4": {
+                "_id": "07f260f4-466c-4607-9a33-f7d23b24f1b4",
+                "_ownerId": "7b3143e1-d6df-4e67-bd7e-5f8b03f2fd3f",
+                "title": "Basketball Training Session",
+                "description": "Check out these drills that can improve your shooting accuracy.",
+                "imageUrl": "https://bloximages.newyork1.vip.townnews.com/conwaydailysun.com/content/tncms/assets/v3/editorial/9/4a/94aff42a-c7bb-11ef-8f25-bf73b47b3acd/67745db02e2be.image.jpg",
+                "sportType": "Basketball",
+                "likesCount": 200,
+                "commentsCount": 15,
+                "_createdOn": 1741165800000,
+            },
+            "0sd260f4-466c-4607-9a33-f7d23b24f1b4": {
+                "_id": "0sd260f4-466c-4607-9a33-f7d23b24f1b4",
+                "_ownerId": "bdabf5e9-23be-40a1-9f14-9117b6702a9d",
+                "title": "Golf game",
+                "description": "Check out these techniques.",
+                "imageUrl": "https://staticg.sportskeeda.com/editor/2024/12/23608460-1734375769.jpeg",
+                "sportType": "Golf",
+                "likesCount": 200,
+                "commentsCount": 15,
+                "_createdOn": 1742060972941,
+            },
+            "80a8e856-668f-44e8-a7de-9fa800104347": {
+                "title": "Ice hockey ",
+                "imageUrl": "https://www.fisu.net/app/uploads/2023/09/ice_hockey-1.jpg",
+                "description": "ice hockey is the best",
+                "sportType": "Ice Hockey",
+                "_ownerId": "64000f39-23d4-4ab7-87af-17609a96fc50",
+                "likesCount": 20,
+                "commentsCount": 30,
+                "_createdOn": 1742348972941,
+                "_id": "80a8e856-668f-44e8-a7de-9fa800104347"
+            }
+          }
     };
     var rules$1 = {
     	users: {
