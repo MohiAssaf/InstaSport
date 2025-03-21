@@ -1,6 +1,6 @@
-export default function postDateConvertAgo(ISODate) { 
+export default function postDateConvertAgo(timeStamp) { 
     const now = new Date();
-    const past = new Date(ISODate);
+    const past = new Date(timeStamp);
 
     const diffMS = now - past;
 
