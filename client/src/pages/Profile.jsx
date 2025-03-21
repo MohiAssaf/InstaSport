@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router";
-import { useLogout, useUser } from "../api/authApi";
+import { useLogout } from "../api/authApi";
+import { useUser } from "../api/userApi";
 
 const Profile = () => {
     const {logout} = useLogout()
