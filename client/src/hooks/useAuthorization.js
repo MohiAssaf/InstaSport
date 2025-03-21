@@ -15,7 +15,7 @@ export const useAuth = () => {
             }
         }
 
-        return requester.baseRequest(method, url, data, userData ? authOptions : options)
+        return requester.baseRequest(method, url, data, userData.token ? authOptions : options)
     }
 
     return {
