@@ -1,21 +1,24 @@
 import { useParams } from "react-router";
 import styles from "./DetailsPost.module.css";
-import { useState } from "react";
+import { useOptimistic, useState } from "react";
 import { usePost } from "../../api/catalogApi";
-import { useAuth } from "../../hooks/useAuthorization";
 import CommentsShow from "../Comments/CommentsShow/CommentsShow";
 import CommentCreate from "../Comments/CommentCreate/CommentCreate";
 import { useComments, useCreateComment } from "../../api/commentApi";
 import { useUser } from "../../api/userApi";
+import {v4 as demoId} from 'uuid'
 
 const DetailsPost = () => {
     const { id } = useParams();
+    
     const {post} = usePost(id);
     const {user} = useUser();
+
     const {create} = useCreateComment();
     const {comments, addComment} = useComments(id);
+    const [optimisticComments, addOptimisticComment] = useOptimistic(comments, (state, newComment) => [...state, newComment]);
+
     const [like, setLike] = useState(false);
-    const [error, setError] = useState("");
     const isOwner = user._id === post._ownerId
 
 
@@ -23,11 +26,25 @@ const DetailsPost = () => {
         const comment = formData.get("postComment");
 
         if(comment === ''){
-            setError("You can't add an empty comment");
             return
         }
 
+        const newOptComment = {
+            _ownerId: user._id,
+            content: comment,
+            postId: id,
+            _createdOn: Date.now(),
+            _id: demoId(),
+            pending: true,
+            author: {
+                ...user
+            }
+        }
+
+        addOptimisticComment(newOptComment)
+
         const newC = await create(comment, id);
+
         addComment({...newC, author: user})
     }
 
@@ -52,7 +69,7 @@ const DetailsPost = () => {
                     <div className={styles.postTitle}>
                         <h1><span>Description:</span> {post.description}</h1>
                     </div>
-                    <CommentsShow postComments={comments}/>
+                    <CommentsShow postComments={optimisticComments}/>
                     <div className={styles.postActions}>
                         <div className={styles.postLikeCom}>
                             <i 
@@ -63,7 +80,7 @@ const DetailsPost = () => {
                             <i className="fa-regular fa-comment"><span>{comments.length}</span></i>
                         </div>
                         <div>
-                            <CommentCreate error={error} formSubmit={formAction} />
+                            <CommentCreate formSubmit={formAction} />
                         </div>
                     </div>
 
