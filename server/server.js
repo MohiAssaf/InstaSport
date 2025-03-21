@@ -1340,7 +1340,27 @@
     			email: "admin@abv.bg",
     			username: "Admin",
     			hashedPassword: "fac7060c3e17e6f151f247eacb2cd5ae80b8c36aedb8764e18a41bbdc16aa302"
-    		}
+    		}, 
+            "e4cf51f7-6237-4f5a-ae68-188e139d97ba": {
+                firstName: "Cristiano",
+                lastName: "Ronaldo",
+                email: "cr7@gmail.com",
+                username: "cronaldo",
+                profileImg: "https://hips.hearstapps.com/hmg-prod/images/cristiano-ronaldo-of-portugal-reacts-as-he-looks-on-during-news-photo-1725633476.jpg",
+                hashedPassword: "df9f8496007e8c471edb3ec0392d0ffcc3c302ab22c22caf83c68e6b4009a653",
+                _createdOn: 1742589872356,
+                _id: "e4cf51f7-6237-4f5a-ae68-188e139d97ba"
+            },
+            "e94f51f7-6237-4f5a-ae68-188e139d97ba": {
+                firstName: "Leo",
+                lastName: "Messi",
+                email: "messi@gmail.com",
+                username: "leomessi",
+                profileImg: "https://i.cbc.ca/1.6835834.1683556421!/fileImage/httpImage/image.jpg_gen/derivatives/16x9_1180/messi-lionel-230430-1180.jpg",
+                hashedPassword: "30463c4b4248066a9adc1c28593b45fa66586b401a6d1357dcd92ca122090f9e",
+                _createdOn: 1742589872356,
+                _id: "e94f51f7-6237-4f5a-ae68-188e139d97ba"
+            }
     	},
     	sessions: {
     	}
@@ -1400,13 +1420,41 @@
     		}
     	},
     	comments: {
-    		"0a272c58-b7ea-4e09-a000-7ec988248f66": {
-    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-    			content: "Great recipe!",
-    			recipeId: "8f414b4f-ab39-4d36-bedb-2ad69da9c830",
-    			_createdOn: 1614260681375,
-    			_id: "0a272c58-b7ea-4e09-a000-7ec988248f66"
-    		}
+    		"a1ab96a3-d8b4-4b6a-9a2c-eac9fa3e2b7e": {
+                "_ownerId": "e4cf51f7-6237-4f5a-ae68-188e139d97ba",
+                "content": "Nice Work!!!",
+                "postId": "07f260f4-466c-4607-9a33-f7273b24f1b4",
+                "_createdOn": 1742589249036,
+                "_id": "a1ab96a3-d8b4-4b6a-9a2c-eac9fa3e2b7e"
+            },
+            "a2ab96a3-d8b4-4b6a-9a2c-eac9fa3e2b7e": {
+                "_ownerId": "e4cf51f7-6237-4f5a-ae68-188e139d97ba",
+                "content": "Where can i watch the match highlights i am so existed",
+                "postId": "07f260f4-466c-4607-9a33-f7273b24f1b4",
+                "_createdOn": 1742589249036,
+                "_id": "a2ab96a3-d8b4-4b6a-9a2c-eac9fa3e2b7e"
+            },
+            "a3ab96a3-d8b4-4b6a-9a2c-eac9fa3e2b7e": {
+                "_ownerId": "e94f51f7-6237-4f5a-ae68-188e139d97ba",
+                "content": "How many goals did you score?",
+                "postId": "07f260f4-466c-4607-9a33-f7273b24f1b4",
+                "_createdOn": 1742589249036,
+                "_id": "a3ab96a3-d8b4-4b6a-9a2c-eac9fa3e2b7e"
+            },
+            "a4ab96a3-d8b4-4b6a-9a2c-eac9fa3e2b7e": {
+                "_ownerId": "e4cf51f7-6237-4f5a-ae68-188e139d97ba",
+                "content": "This is probably the best match i have ever seen",
+                "postId": "07f260f4-466c-4607-9a33-f7273b24f1b4",
+                "_createdOn": 1742589249036,
+                "_id": "a4ab96a3-d8b4-4b6a-9a2c-eac9fa3e2b7e"
+            },
+            "a5ab96a3-d8b4-4b6a-9a2c-eac9fa3e2b7e": {
+                "_ownerId": "e94f51f7-6237-4f5a-ae68-188e139d97ba",
+                "content": "I can't for the second leg to start because i know for sure there will be a comeback!!!",
+                "postId": "07f260f4-466c-4607-9a33-f7273b24f1b4",
+                "_createdOn": 1742589249036,
+                "_id": "a5ab96a3-d8b4-4b6a-9a2c-eac9fa3e2b7e"
+            },
     	},
     	records: {
     		i01: {
