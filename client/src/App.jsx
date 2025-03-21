@@ -2,7 +2,6 @@ import './index.css'
 import Header from './components//Header/Header'
 import Home from './pages/Home'
 import { Routes, Route } from 'react-router'
-import { AuthProvider } from './context/AuthContext'
 import Catalog from './pages/Catalog'
 import About from './pages/About'
 import Login from './pages/Login'
@@ -15,6 +14,7 @@ import NotFound from './pages/NotFound'
 import CreatePost from './components/CreatePost/CreatePost'
 import DetailsPost from './components/DetailsPost/DetailsPost'
 import EditProfile from './components/EditProfile/EditProfile'
+import AuthProvider from './provider/AuthProvider'
 
 function App() {
 
