@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
-import SubmitButton from "../SubmitButton/SubmitButton";
-import { useCreatePost } from "../../api/catalogApi";
+import SubmitButton from "../../SubmitButton/SubmitButton";
+import { useCreatePost } from "../../../api/catalogApi";
 
 const sportTypes = [
     "Football",
@@ -29,7 +29,7 @@ const CreatePost = () => {
 
 
     return (
-        <div className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-gray-200">
+        <div className="relative min-h-screen flex items-center justify-center bg-gray-200">
             <div className="max-w-lg w-full bg-white shadow-lg rounded-lg p-8">
                     <h1 className="text-3xl font-bold text-center mb-4">Create Post</h1>
 

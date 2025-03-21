@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
-import postDateConvertAgo from '../../utils/postDate';
+import postDateConvertAgo from '../../../utils/postDate';
 import styles from './PostCard.module.css';
-import { useAuth } from '../../hooks/useAuthorization';
+import { useAuth } from '../../../hooks/useAuthorization';
 
 const PostCard = ({post}) => {
   const {isAuthenticated} = useAuth()

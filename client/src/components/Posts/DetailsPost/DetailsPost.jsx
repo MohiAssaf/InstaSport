@@ -1,11 +1,11 @@
 import { useParams } from "react-router";
 import styles from "./DetailsPost.module.css";
 import { useOptimistic, useState } from "react";
-import { usePost } from "../../api/catalogApi";
-import CommentsShow from "../Comments/CommentsShow/CommentsShow";
-import CommentCreate from "../Comments/CommentCreate/CommentCreate";
-import { useComments, useCreateComment } from "../../api/commentApi";
-import { useUser } from "../../api/userApi";
+import { usePost } from "../../../api/catalogApi";
+import CommentsShow from "../../Comments/CommentsShow/CommentsShow";
+import CommentCreate from "../../Comments/CommentCreate/CommentCreate";
+import { useComments, useCreateComment } from "../../../api/commentApi";
+import { useUser } from "../../../api/userApi";
 import {v4 as demoId} from 'uuid'
 
 const DetailsPost = () => {

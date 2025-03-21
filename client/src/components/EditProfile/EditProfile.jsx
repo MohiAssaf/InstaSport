@@ -1,28 +1,22 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router";
-import userServices from "../../services/userServices";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router";
 import SubmitButton from "../SubmitButton/SubmitButton";
+import { useUpdateUser, useUser } from "../../api/userApi";
 
 export default function EditProfile() {
-    const {id} = useParams()
     const navigate = useNavigate();
-    const [data, setData] = useState([])
+    const {user} = useUser();
+    const {updateUser} = useUpdateUser();
     const [error, setError] = useState("");
-
-    useEffect(() => {
-        userServices.getOne(id)
-        .then(setData)
-    }, [id])
-    
 
     const submitAction = async (formData) => {
       const formValues = Object.fromEntries(formData);
 
       const isSame =  (
-        data.firstName === formValues?.firstName &&
-        data.lastName === formValues?.lastName &&
-        data.username === formValues?.username &&
-        data.profileImg === formValues?.profileImg
+        user.firstName === formValues?.firstName &&
+        user.lastName === formValues?.lastName &&
+        user.username === formValues?.username &&
+        user.profileImg === formValues?.profileImg
     );
 
       if(isSame){
@@ -30,19 +24,13 @@ export default function EditProfile() {
       }
 
 
-      const userData = await userServices.getAllUsers();
-      const users = Object.values(userData);
-
-      if(users.some(user => user.username === formValues.username)){
+      const result = await updateUser({...formValues, password: user.password, repeatPassword: user.password, _id: user._id});
+      if(result.message){
         setError("A user with this username already exists");
-        setTimeout(() => {
-            setError("")
-        }, 3000)
+        setTimeout(() => {setError("")}, 3000)
         return;
       }
 
-      
-      await userServices.update({...formValues, password: data.password, repeatPassword: data.password, _id: data._id}, id);
       navigate("/profile")
 
     }
@@ -63,8 +51,8 @@ export default function EditProfile() {
                 type="text"
                 name="firstName"
                 className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Enter your First Name"
-                defaultValue={data?.firstName}
+                placeholder="Enter your new First Name"
+                defaultValue={user?.firstName}
                 required
               />
             </div>
@@ -76,8 +64,22 @@ export default function EditProfile() {
                     type="text" 
                     name="lastName" 
                     className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Enter your Last Name"
-                    defaultValue={data?.lastName}
+                    placeholder="Enter your new Last Name"
+                    defaultValue={user?.lastName}
+                />
+            </div>
+            <div>
+                <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
+                    Email
+                </label>
+                <input 
+                    type="email" 
+                    name="email" 
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Enter your new email"
+                    autoComplete="new-email"
+                    defaultValue={user?.email}
+                    required
                 />
             </div>
             <div>
@@ -90,7 +92,7 @@ export default function EditProfile() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter a username"
                 autoComplete="new-username"
-                defaultValue={data?.username}
+                defaultValue={user?.username}
                 required
                 />
             </div>
@@ -106,7 +108,7 @@ export default function EditProfile() {
                 name="profileImg" 
                 placeholder="Paste an image URL..."
                 className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"  
-                defaultValue={data?.profileImg}
+                defaultValue={user?.profileImg}
                 />
             </div>
   
