@@ -36,10 +36,22 @@ export const useCreatePost = () => {
     const {request} = useAuth()
 
     const createPost = (postData) => {
-        return request.post(baseUrl, {...postData, likesCount: 0, commentsCount: 0})
+        return request.post(baseUrl, {...postData})
     }
 
     return {
         createPost
+    }
+}
+
+export const useEditPost = () => {
+    const {request} = useAuth()
+
+    const edit = (postId, postData) => {
+        return request.put(`${baseUrl}/${postId}`, {...postData, _id: postId})
+    }
+
+    return {
+        edit
     }
 }
