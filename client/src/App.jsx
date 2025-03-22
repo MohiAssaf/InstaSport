@@ -20,7 +20,7 @@ import CreatePost from './components/Posts/CreatePost/CreatePost'
 import EditProfile from './components/EditProfile/EditProfile'
 
 import AuthProvider from './provider/AuthProvider'
-import './index.css'
+import './assets/css/index.css'
 
 function App() {
 

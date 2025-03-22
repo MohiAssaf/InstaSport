@@ -4,6 +4,7 @@ import validatePassword from "../utils/validatePassword";
 import SubmitButton from "../components/SubmitButton/SubmitButton";
 import { useRegister } from "../api/authApi";
 import { useAuthContext } from "../context/AuthContext";
+import '../assets/css/form.css'
 
 export default function Register() {
     const navigate = useNavigate();
@@ -32,66 +33,66 @@ export default function Register() {
     }
 
     return (
-      <div className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-gray-200 pt-50 pb-30">
-        <div className="max-w-lg w-full bg-white shadow-lg rounded-lg p-8">
-          <h1 className="text-3xl font-semibold text-center text-gray-800 mb-6">Register</h1>
+      <div className="page">
+        <div className="form-container">
+          <h1 className="form-title">Register</h1>
 
-          {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+          {error && <p className="error-message">{error}</p>}
           
-          <form action={submitAction} className="space-y-8">
-            <div>
-              <label htmlFor="firstName" className="block text-gray-700 font-medium mb-2">
+          <form action={submitAction} className="form">
+            <div className="form-group">
+              <label htmlFor="firstName" className="label">
                 First Name
               </label>
               <input
                 type="text"
                 name="firstName"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="input-field"
                 placeholder="Enter your First Name"
                 required
               />
             </div>
-            <div>
-                <label htmlFor="lastName" className="block text-gray-700 font-medium mb-2">
+            <div className="form-group">
+                <label htmlFor="lastName" className="label">
                     Last Name
                 </label>
                 <input 
                     type="text" 
                     name="lastName" 
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="input-field"
                     placeholder="Enter your Last Name"
                 />
             </div>
-            <div>
-                <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
+            <div className="form-group">
+                <label htmlFor="email" className="label">
                     Email
                 </label>
                 <input 
                     type="email" 
                     name="email" 
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="input-field"
                     placeholder="Enter your email"
                     autoComplete="new-email"
                     required
                 />
             </div>
-            <div>
-                <label htmlFor="username" className="block text-gray-700 font-medium mb-2">
+            <div className="form-group">
+                <label htmlFor="username" className="label">
                     Username
                 </label>
                 <input 
                 type="text"
                 name="username"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="input-field"
                 placeholder="Enter a username"
                 autoComplete="new-username"
                 required
                 />
             </div>
-            <div>
+            <div className="form-group">
                 <label 
                 htmlFor="profileImg"
-                className="block text-gray-700 font-medium mb-2"
+                className="label"
                 >
                     Profile Picture
                 </label>
@@ -99,45 +100,44 @@ export default function Register() {
                 type="url" 
                 name="profileImg" 
                 placeholder="Paste an image URL..."
-                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="input-field"
                 />
             </div>
-            <div>
-                <label htmlFor="password" className="block text-gray-700 font-medium mb-2">
+            <div className="form-group">
+                <label htmlFor="password" className="label">
                     Password
                 </label>
                 <input 
                 type="password"
                 name="password"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="input-field"
                 placeholder="Enter a password"
                 autoComplete="new-password"
                 required
                 />
             </div>
-            <div>
-                <label htmlFor="repeatPassword" className="block text-gray-700 font-medium mb-2">
+            <div className="form-group">
+                <label htmlFor="repeatPassword" className="label">
                     Confirm Password
                 </label>
                 <input 
                 type="password"
                 name="repeatPassword"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="input-field"
                 placeholder="Confirm password"
                 autoComplete="new-password"
                 required
                 />
             </div>
   
-            <div className="flex justify-center">
-              <SubmitButton btnText="Register" /> 
-            </div>
+            
+            <SubmitButton btnText="Register" /> 
           </form>
   
-          <div className="mt-6 text-center text-gray-600">
+          <div className="redirect-link-container">
             <p>
               Already have an account?
-              <Link to="/login" className="text-blue-500 hover:text-blue-700 ml-1">
+              <Link to="/login" className="redirect-link">
                 Login
               </Link>
             </p>

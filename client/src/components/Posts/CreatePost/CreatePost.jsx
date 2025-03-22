@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import SubmitButton from "../../SubmitButton/SubmitButton";
 import { useCreatePost } from "../../../api/catalogApi";
+import '../../../assets/css/form.css'
 
 const sportTypes = [
     "Football",
@@ -29,15 +30,16 @@ const CreatePost = () => {
 
 
     return (
-        <div className="relative min-h-screen flex items-center justify-center bg-gray-200">
-            <div className="max-w-lg w-full bg-white shadow-lg rounded-lg p-8">
-                    <h1 className="text-3xl font-bold text-center mb-4">Create Post</h1>
+        <div className="page">
+            <div className="form-container">
+                    <h1 className="form-title">Create Post</h1>
 
-                    <form className="space-y-4" action={formAction}>
-                        <div>
+                    <form className="form" action={formAction}>
+                        <div className="form-group">
                             <label 
+                            
                             htmlFor="title"
-                            className="block text-2xl text-gray-700 font-medium mb-3"
+                            className="label"
                             >
                                 Title
                             </label>
@@ -45,15 +47,15 @@ const CreatePost = () => {
                             type="text" 
                             name="title" 
                             placeholder="Enter the title of your post"
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="input-field"
                             required
                             />
                         </div>
 
-                        <div>
+                        <div className="form-group">
                             <label 
                             htmlFor="imageUrl"
-                            className="block text-2xl text-gray-700 font-medium mb-2"
+                            className="label"
                             >
                                 Image
                             </label>
@@ -61,33 +63,33 @@ const CreatePost = () => {
                             type="url" 
                             name="imageUrl" 
                             placeholder="Paste an image URL..."
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="input-field"
                             required
                             />
                         </div>
-                        <div>
+                        <div className="form-group">
                             <label 
                             htmlFor="description"
-                            className="block text-2xl text-gray-700 font-medium mb-2"
+                            className="label"
                             >
                                 Description
                             </label>
                             <textarea
                             name="description"
                             placeholder="A brief description of the post"
-                            className="w-full min-h-[140px] resize-none px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="input-field desc"
                             >
                             </textarea> 
                         </div>
-                        <div>
+                        <div className="form-group">
                             <label 
                             htmlFor="sportType"
-                            className="block text-2xl text-gray-700 font-medium mb-2"
+                            className="label"
                             >
                                 Sport Type
                             </label>
 
-                            <select name="sportType" className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-md" required>
+                            <select name="sportType" className="input-field" required>
                                 <option key="none" value="">------</option>
                                 {sportTypes.map(sport => (
                                     <option key={sport} value={sport}>{sport}</option>
@@ -95,9 +97,8 @@ const CreatePost = () => {
                             </select>
                         </div>
 
-                        <div className="flex justify-center pt-4">
-                                <SubmitButton btnText="Create" />
-                        </div>
+                        <SubmitButton btnText="Create" />
+    
                     </form>
                 </div>
         </div>
