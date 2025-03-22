@@ -1,20 +1,8 @@
 import { useNavigate } from "react-router";
 import SubmitButton from "../../SubmitButton/SubmitButton";
 import { useCreatePost } from "../../../api/catalogApi";
+import { sportTypes } from "../../../constants/sportTypes";
 import '../../../assets/css/form.css'
-
-const sportTypes = [
-    "Football",
-    "Basketball",
-    "Cricket",
-    "Tennis",
-    "American Football",
-    "Baseball",
-    "Golf",
-    "Mixed Martial Arts (MMA)",
-    "Ice Hockey",
-    "Other"
-  ];
     
 
 const CreatePost = () => {
