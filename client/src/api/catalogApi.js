@@ -36,7 +36,7 @@ export const useCreatePost = () => {
     const {request} = useAuth()
 
     const createPost = (postData) => {
-        return request.post(baseUrl, {...postData})
+        return request.post(baseUrl, postData)
     }
 
     return {
@@ -53,5 +53,18 @@ export const useEditPost = () => {
 
     return {
         edit
+    }
+}
+
+
+export const useDeletePost = () => {
+    const {request} = useAuth()
+
+    const delPost = (postId) => {
+        return request.delete(`${baseUrl}/${postId}`)
+    }
+
+    return {
+        delPost
     }
 }
