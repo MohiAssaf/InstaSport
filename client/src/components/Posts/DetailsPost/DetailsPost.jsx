@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import styles from "./DetailsPost.module.css";
 import { useOptimistic, useState } from "react";
 import { usePost } from "../../../api/catalogApi";
@@ -59,13 +59,19 @@ const DetailsPost = () => {
                     <img className={styles.postImg} src={post.imageUrl} alt={`Post-${post._id}`} />
                 </div>
                 <div className={styles.postDetails}>
-                    {isOwner &&(
-                        <div className={styles.postEditDel}>
-                            <button className={styles.editBtn}>Edit</button>
-                            <button className={styles.delBtn}>Delete</button>
+                    <div className={styles.postHeader}>
+                        <div className={styles.postTitle}>
+                            <h2><span>Title: </span>{post.title}</h2>
+                            <h2><span>Category: </span>{post.sportType}</h2>
                         </div>
-                        )
-                    }
+                        {isOwner &&(
+                            <div className={styles.postEditDel}>
+                                <Link to={`/catalog/edit/${id}`} className={styles.editBtn}>Edit</Link>
+                                <Link className={styles.delBtn}>Delete</Link>
+                            </div>
+                            )
+                        }
+                    </div>
                     <div className={styles.postTitle}>
                         <h1><span>Description:</span> {post.description}</h1>
                     </div>
