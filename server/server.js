@@ -1342,8 +1342,8 @@
     			hashedPassword: "fac7060c3e17e6f151f247eacb2cd5ae80b8c36aedb8764e18a41bbdc16aa302"
     		}, 
             "e4cf51f7-6237-4f5a-ae68-188e139d97ba": {
-                firstName: "Cristiano",
-                lastName: "Ronaldo",
+                name: "Cristiano Ronaldo",
+                bio: "I love football very much and i am better than messi",
                 email: "cr7@gmail.com",
                 username: "cronaldo",
                 profileImg: "https://hips.hearstapps.com/hmg-prod/images/cristiano-ronaldo-of-portugal-reacts-as-he-looks-on-during-news-photo-1725633476.jpg",
@@ -1352,8 +1352,8 @@
                 _id: "e4cf51f7-6237-4f5a-ae68-188e139d97ba"
             },
             "e94f51f7-6237-4f5a-ae68-188e139d97ba": {
-                firstName: "Leo",
-                lastName: "Messi",
+                name: "Leo Messi",
+                bio: "I love football more than ronaldo",
                 email: "messi@gmail.com",
                 username: "leomessi",
                 profileImg: "https://i.cbc.ca/1.6835834.1683556421!/fileImage/httpImage/image.jpg_gen/derivatives/16x9_1180/messi-lionel-230430-1180.jpg",
@@ -1706,8 +1706,6 @@
                 "description": "Here are the highlights of last night's thrilling football match!",
                 "imageUrl": "https://img.allfootballapp.com/www/M00/1C/A7/720x-/-/-/CgAGVWENTcCAbXbEAAFUuyKYKu8634.jpg",
                 "sportType": "Football",
-                "likesCount": 120,
-                "commentsCount": 5,
                 "_createdOn": 1740823200000,
             },
             "07f260f4-466c-4607-9a33-f7d23b24f1b4": {
@@ -1717,8 +1715,6 @@
                 "description": "Check out these drills that can improve your shooting accuracy.",
                 "imageUrl": "https://bloximages.newyork1.vip.townnews.com/conwaydailysun.com/content/tncms/assets/v3/editorial/9/4a/94aff42a-c7bb-11ef-8f25-bf73b47b3acd/67745db02e2be.image.jpg",
                 "sportType": "Basketball",
-                "likesCount": 200,
-                "commentsCount": 15,
                 "_createdOn": 1741165800000,
             },
             "0sd260f4-466c-4607-9a33-f7d23b24f1b4": {
@@ -1728,8 +1724,6 @@
                 "description": "Check out these techniques.",
                 "imageUrl": "https://staticg.sportskeeda.com/editor/2024/12/23608460-1734375769.jpeg",
                 "sportType": "Golf",
-                "likesCount": 200,
-                "commentsCount": 15,
                 "_createdOn": 1742060972941,
             },
             "80a8e856-668f-44e8-a7de-9fa800104347": {
@@ -1738,8 +1732,6 @@
                 "description": "ice hockey is the best",
                 "sportType": "Ice Hockey",
                 "_ownerId": "64000f39-23d4-4ab7-87af-17609a96fc50",
-                "likesCount": 20,
-                "commentsCount": 30,
                 "_createdOn": 1742348972941,
                 "_id": "80a8e856-668f-44e8-a7de-9fa800104347"
             }
