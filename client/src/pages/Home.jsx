@@ -18,13 +18,7 @@ export default function Home() {
 
         <div className="mt-8 flex flex-row items-center justify-center gap-3">
           <Link
-            to="/register"
-            className="rounded-lg bg-blue-600 px-6 py-3 text-lg font-semibold text-white shadow-md hover:bg-blue-500 transition"
-          >
-            Get Started
-          </Link>
-          <Link
-            to="/for-you"
+            to="/catalog"
             className="rounded-lg bg-blue-600 px-6 py-3 text-lg font-semibold text-white shadow-md hover:bg-blue-500 transition"
           >
             Explore Posts →
