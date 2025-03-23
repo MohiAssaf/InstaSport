@@ -41,27 +41,16 @@ export default function Register() {
           
           <form action={submitAction} className="form">
             <div className="form-group">
-              <label htmlFor="firstName" className="label">
-                First Name
+              <label htmlFor="name" className="label">
+                Name
               </label>
               <input
                 type="text"
-                name="firstName"
+                name="name"
                 className="input-field"
-                placeholder="Enter your First Name"
+                placeholder="Enter your Full Name"
                 required
               />
-            </div>
-            <div className="form-group">
-                <label htmlFor="lastName" className="label">
-                    Last Name
-                </label>
-                <input 
-                    type="text" 
-                    name="lastName" 
-                    className="input-field"
-                    placeholder="Enter your Last Name"
-                />
             </div>
             <div className="form-group">
                 <label htmlFor="email" className="label">
@@ -88,6 +77,21 @@ export default function Register() {
                 autoComplete="new-username"
                 required
                 />
+            </div>
+            <div className="form-group">
+                <label 
+                htmlFor="bio"
+                className="label"
+                >
+                    Profile Bio
+                </label>
+                <textarea
+                name="bio"
+                placeholder="Write something about yourself..."
+                className="input-field desc"
+                required
+                >
+                </textarea> 
             </div>
             <div className="form-group">
                 <label 
