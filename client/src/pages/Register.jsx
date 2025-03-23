@@ -15,7 +15,7 @@ export default function Register() {
 
     const submitAction = async (formData) => {
       const data = Object.fromEntries(formData);
-      const errors = validatePassword(data);
+      const errors = validatePassword(data.password, data.repeatPassword);
 
       const result = await register(data);
 
