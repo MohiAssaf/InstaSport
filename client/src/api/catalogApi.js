@@ -23,12 +23,37 @@ export const usePost = (postId) => {
     const [post, setPost] = useState({});
 
     useEffect(() => {
+        if (!postId) return;
         requester.get(`${baseUrl}/${postId}`)
         .then(setPost)
-    }, [])
+    }, [postId])
 
     return {
         post
+    }
+}
+
+
+export const useMyPosts = (userId) => {
+    const {request} = useAuth();
+    const [myPosts, setMyPosts] = useState([]);
+
+
+    useEffect(() => {
+        if (!userId) return;
+    
+        const searchParams = new URLSearchParams({
+            where: `_ownerId="${userId}"`, 
+            load: `author=_ownerId:users`, 
+        });
+    
+        request.get(`${baseUrl}?${searchParams.toString()}`)
+            .then(setMyPosts)  
+    }, [userId]);
+
+    
+    return {
+        myPosts
     }
 }
 
