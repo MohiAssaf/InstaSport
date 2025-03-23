@@ -16,6 +16,7 @@ import UnprotectedRoute from './routes/UnprotectedRoute'
 
 import DetailsPost from './components/Posts/DetailsPost/DetailsPost'
 import CreatePost from './components/Posts/CreatePost/CreatePost'
+import EditPost from './components/Posts/EditPost/EditPost'
 
 import EditProfile from './components/EditProfile/EditProfile'
 
@@ -46,6 +47,7 @@ function App() {
 
               <Route path='/catalog/create' element={<CreatePost />} />
               <Route path='/catalog/details/:id' element={<DetailsPost/>}/>
+              <Route path='/catalog/edit/:id' element={<EditPost/>}/>
             </Route>
 
             <Route path='*' element={<NotFound />}/>
