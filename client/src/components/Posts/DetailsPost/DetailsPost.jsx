@@ -17,18 +17,18 @@ const DetailsPost = () => {
     const {user} = useUser();
 
     const {create} = useCreateComment();
-    const {comments, addComment} = useComments(id);
-    const [optimisticComments, addOptimisticComment] = useOptimistic(comments, (state, newComment) => [...state, newComment]);
+    const {comments, addComment, editCommnet} = useComments(id);
+    const [optimisticComments, setOptimisticComment] = useOptimistic(comments, (state, newComment) => [...state, newComment]);
 
     const [like, setLike] = useState(false);
 
     const {delPost} = useDeletePost(); 
     const [delFormActive, setDelFormActive] = useState(false);
 
-    const isOwner = user._id === post._ownerId
 
+    const isOwner = user._id === post._ownerId;
 
-    const formAction = async (formData) => {
+    const addCommentAction = async (formData) => {
         const comment = formData.get("postComment");
 
         if(comment === ''){
@@ -47,7 +47,7 @@ const DetailsPost = () => {
             }
         }
 
-        addOptimisticComment(newOptComment)
+        setOptimisticComment(newOptComment)
 
         const newC = await create(comment, id);
 
@@ -89,7 +89,14 @@ const DetailsPost = () => {
                         <div className={styles.postTitle}>
                             <h1><span>Description:</span> {post.description}</h1>
                         </div>
-                        <CommentsShow postComments={optimisticComments}/>
+ 
+                        <CommentsShow 
+                            postComments={optimisticComments} 
+                            postOwner={isOwner} 
+                            onEditComment={editCommnet}
+                            currentUser={user}
+                        />
+
                         <div className={styles.postActions}>
                             <div className={styles.postLikeCom}>
                                 <i 
@@ -100,7 +107,7 @@ const DetailsPost = () => {
                                 <i className="fa-regular fa-comment"><span>{comments.length}</span></i>
                             </div>
                             <div>
-                                <CommentCreate formSubmit={formAction} />
+                                <CommentCreate formSubmit={addCommentAction} />
                             </div>
                         </div>
 
