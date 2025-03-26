@@ -14,10 +14,15 @@
     font-size: 0.9rem;
 }
 
-.commentConetent{
+.commentConetent {
     display: flex;
     align-items: center;
+    width: 100%;
     gap: 0.5rem;
+}
+
+.editActive {
+    justify-content: space-between;
 }
 
 .comment img {
@@ -48,17 +53,3 @@
     opacity: 0.8;
 }
 
-.commentUpdateBtns{
-    font-weight: 600;
-    cursor: pointer;
-    transition: all ease-in-out 0.2s;
-}
-
-.commentUpdateBtns:hover{
-    opacity: 0.8;
-}
-
-.editCommentInput{
-    border: 2px solid black;
-    padding-left: 5px;
-}
