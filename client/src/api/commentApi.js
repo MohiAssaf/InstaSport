@@ -22,7 +22,8 @@ export const useComments = (post_Id) => {
     
     return {
         comments,
-        addComment: (newComment) => setComments(state => [...state, newComment])
+        addComment: (newComment) => setComments(state => [...state, newComment]),
+        editCommnet: (id, updatedComment) => setComments(state => state.map(comment => comment._id === id? updatedComment: comment))
     }
 }
 
@@ -37,5 +38,18 @@ export const useCreateComment = () => {
 
     return {
         create
+    }
+}
+
+
+export const useEditComment = () => {
+    const {request} = useAuth();
+
+    const edit = (id, updatedComment) => {
+        return request.put(`${baseUrl}/${id}`, updatedComment);
+    }
+
+    return {
+        edit,
     }
 }
