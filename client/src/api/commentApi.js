@@ -27,7 +27,28 @@ export const useComments = (post_Id) => {
     }
 }
 
+export const useMyComments = (userId) => {
+    const {request} = useAuth();
+    const [myComments, setMyComments] = useState(0);
 
+
+    useEffect(() => {
+        if (!userId) return;
+    
+        const searchParams = new URLSearchParams({
+            where: `_ownerId="${userId}"`, 
+            count: true
+        });
+    
+        request.get(`${baseUrl}?${searchParams.toString()}`)
+            .then(setMyComments)  
+    }, [userId]);
+
+    
+    return {
+        myComments
+    }
+}
 
 
 export const useCreateComment = () => {

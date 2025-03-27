@@ -3,11 +3,13 @@ import { useLogout } from "../api/authApi";
 import { useUser } from "../api/userApi";
 import { useMyPosts } from "../api/catalogApi";
 import PostCard from "../components/Posts/PostCard/PostCard";
+import { useMyComments } from "../api/commentApi";
 
 const Profile = () => {
     const {logout} = useLogout();
     const {user} = useUser();
     const {myPosts} = useMyPosts(user._id);
+    const {myComments} = useMyComments(user._id);
     const navigation = useNavigate();
 
     const handleLogout = () => {
@@ -30,19 +32,6 @@ const Profile = () => {
                     <div className="flex items-center justify-between">
                         <h1 className="text-2xl font-bold text-gray-800">{user.username}</h1>
                         <div className="flex space-x-4">
-                            <Link 
-                            to={`/profile/edit/`}
-                            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300"
-                            >Edit
-                            </Link>
-
-                            <button 
-                              type="submit" 
-                              onClick={handleLogout} 
-                              className="cursor-pointer px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-300"
-                              >Delete
-                            </button>
-
                             <button 
                               type="submit" 
                               onClick={handleLogout} 
@@ -54,7 +43,7 @@ const Profile = () => {
     
                     <div className="flex space-x-6 mt-4">
                         <h2 className="text-gray-700"><span className="font-bold">{myPosts.length}</span> posts</h2>
-                        <h2 className="text-gray-700"><span className="font-bold">10</span> comments</h2>
+                        <h2 className="text-gray-700"><span className="font-bold">{myComments}</span> comments</h2>
                     </div>
     
                     <div className="mt-4 text-gray-700">
