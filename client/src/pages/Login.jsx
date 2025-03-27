@@ -16,17 +16,12 @@ export default function Login(){
 
       try {
         const result = await login(data);
-        if(!result.accessToken){
-          setError(result.message);
-          setTimeout(() => setError(""), 3000);
-          return
-        }
-        
         userLogin(result);
         navigate("/");
 
-      } catch (e) {
-        setError("Something went wrong. Please try again later.");
+      } catch (error) {
+        setError(error.message);
+        setTimeout(() => setError(""), 3000);
       }
 
     }

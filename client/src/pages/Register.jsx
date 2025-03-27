@@ -17,19 +17,17 @@ export default function Register() {
       const data = Object.fromEntries(formData);
       const errors = validatePassword(data.password, data.repeatPassword);
 
-      const result = await register(data);
+      try {
+        const result = await register(data);
+        userLogin(result);
+        navigate("/");
 
-      if(result.message){
-        errors.push(result.message)
+      } catch (error) {
+        errors.push(error.message)
         setError(errors.join(" "));
         setTimeout(() => setError(""), 3000);
         return;
       }
-
-      userLogin(result);
-      navigate("/");
-
-
     }
 
     return (
