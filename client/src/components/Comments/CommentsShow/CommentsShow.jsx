@@ -9,27 +9,27 @@ const CommentsShow = ({ postComments, postOwner, onEditComment, currentUser}) =>
     
     const editCommentAction = useCallback(async (formData) => {
         const updatedComment = formData.get("updatedComment");
+        const {author, ...commentData} = commentToEdit;
 
-        if(updatedComment === commentToEdit.content || updatedComment === ''){
+        if(updatedComment === commentData.content || updatedComment === ''){
             setCommentToEdit(null);
             return
         }
         
 
-        const editedComment = {...commentToEdit, content: updatedComment};
+        const editedComment = {...commentData, content: updatedComment};
 
-        await edit(editedComment._id, editedComment);
-        onEditComment(commentToEdit._id, editedComment)
+        const newComment = await edit(editedComment._id, editedComment);
+        onEditComment(commentToEdit._id, {...newComment, author});
         setCommentToEdit(null);
+
     }, [commentToEdit, onEditComment])
     
     return (
             <div className={styles.container}>
                 {postComments.map(comment => {
                     const isCommentEditClicked= commentToEdit?._id === comment._id;
-                    const isCommentAuthorUser = comment?.author._id ===currentUser._id
-                    console.log(currentUser)
-                    
+                    const isCommentAuthorUser = comment?.author._id ===currentUser._id                    
                     return (
                         <div key={comment._id} className={styles.comment} style={comment?.pending ? {opacity: 0.4}: {}}>
 
