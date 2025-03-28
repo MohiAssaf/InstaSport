@@ -30,7 +30,7 @@ export const useLogout = () => {
 
     const logout = () => {
         userLogout()
-        return request.get(baseUrl)
+        return request.get(`${baseUrl}/logout`)
     }
 
     return {
