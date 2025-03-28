@@ -4,10 +4,10 @@ import { useOptimistic, useState } from "react";
 import { useDeletePost, usePost } from "../../../api/catalogApi";
 import CommentsShow from "../../Comments/CommentsShow/CommentsShow";
 import CommentCreate from "../../Comments/CommentCreate/CommentCreate";
-import { useComments, useCreateComment } from "../../../api/commentApi";
-import { useUser } from "../../../api/userApi";
+import { useComments, useCreateComment, useDeleteComment } from "../../../api/commentApi";
 import {v4 as demoId} from 'uuid'
-import DeletePostForm from "../DeletePost/DeletePost";
+import { useUser } from "../../../api/authApi";
+import DeleteForm from "../../DeleteForm/DeleteForm";
 
 const DetailsPost = () => {
     const { id } = useParams();
@@ -17,13 +17,16 @@ const DetailsPost = () => {
     const {user} = useUser();
 
     const {create} = useCreateComment();
-    const {comments, addComment, editCommnet} = useComments(id);
+    const {comments, addComment, editCommnet, deleteComment} = useComments(id);
     const [optimisticComments, setOptimisticComment] = useOptimistic(comments, (state, newComment) => [...state, newComment]);
 
     const [like, setLike] = useState(false);
 
     const {delPost} = useDeletePost(); 
-    const [delFormActive, setDelFormActive] = useState(false);
+    const [delPostActive, setDelPostActive] = useState(false);
+
+    const {delComment} = useDeleteComment()
+    const [commentToDelete, setCommentToDelete] = useState(null);
 
 
     const isOwner = user._id === post._ownerId;
@@ -54,9 +57,17 @@ const DetailsPost = () => {
         addComment({...newC, author: user})
     }
 
+    const handleDeleteComment = async () => {
+        await delComment(commentToDelete);
+        deleteComment(commentToDelete);
+        setCommentToDelete(null);
+        
+    };
+    
+
     const handleDeletePost = async () => {
         await delPost(post._id)
-        setDelFormActive(false);
+        setDelPostActive(false);
         nav('/catalog')
     }
 
@@ -81,7 +92,7 @@ const DetailsPost = () => {
                             {isOwner &&(
                                 <div className={styles.postEditDel}>
                                     <Link to={`/catalog/edit/${id}`} className={styles.editBtn}>Edit</Link>
-                                    <button onClick={() => setDelFormActive(true)} className={styles.delBtn}>Delete</button>
+                                    <button onClick={() => setDelPostActive(true)} className={styles.delBtn}>Delete</button>
                                 </div>
                                 )
                             }
@@ -94,6 +105,7 @@ const DetailsPost = () => {
                             postComments={optimisticComments} 
                             postOwner={isOwner} 
                             onEditComment={editCommnet}
+                            onDeleteComment={(comment) => setCommentToDelete(comment._id)}
                             currentUser={user}
                         />
 
@@ -115,7 +127,8 @@ const DetailsPost = () => {
                 </div>
             </div>
 
-            {delFormActive && <DeletePostForm closeForm={() => setDelFormActive(false)} onDelete={handleDeletePost}/>}
+            {delPostActive && <DeleteForm text="post" closeForm={() => setDelPostActive(false)} onDelete={handleDeletePost}/>}
+            {commentToDelete !== null && <DeleteForm text="comment" closeForm={() => setCommentToDelete(null)} onDelete={handleDeleteComment}/>}
         </>
     );
 };

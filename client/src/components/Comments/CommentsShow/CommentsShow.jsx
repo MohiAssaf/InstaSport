@@ -3,7 +3,7 @@ import CommentEdit from '../CommentEdit/CommentEdit';
 import { useCallback, useState } from 'react';
 import { useEditComment } from '../../../api/commentApi';
 
-const CommentsShow = ({ postComments, postOwner, onEditComment, currentUser}) => {
+const CommentsShow = ({ postComments, postOwner, onEditComment, onDeleteComment, currentUser}) => {
     const {edit} = useEditComment();
     const [commentToEdit, setCommentToEdit] = useState(null);
     
@@ -24,7 +24,7 @@ const CommentsShow = ({ postComments, postOwner, onEditComment, currentUser}) =>
         setCommentToEdit(null);
 
     }, [commentToEdit, onEditComment])
-    
+
     return (
             <div className={styles.container}>
                 {postComments.map(comment => {
@@ -58,6 +58,7 @@ const CommentsShow = ({ postComments, postOwner, onEditComment, currentUser}) =>
 
                                     <i 
                                     className="text-red-700 fa-solid fa-circle-xmark"
+                                    onClick={() => onDeleteComment(comment)}
                                     ></i>
 
                                 </>
