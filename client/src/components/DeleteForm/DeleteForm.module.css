@@ -1,0 +1,62 @@
+
+.backBlur{
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px); 
+}
+
+.deleteContainer{
+    position: relative;
+    text-align: center;
+    padding: 2.5rem 1.5rem; 
+    border-radius: 0.75rem; 
+    background-color: #ffffff; 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
+}
+
+.deleteContainer i{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: #f6443b;
+    cursor: pointer;
+}
+
+.delTitle{
+    padding: 1rem 1rem 2.5rem 1rem;
+    font-size: 1.5rem;
+    line-height: 2rem; 
+}
+
+.btnContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:  2rem;
+}
+
+.btnContainer button{
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 1rem;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.btnContainer .yes {
+    background-color: #f6443b;
+}
+
+.btnContainer .no {
+    background-color: #3182ce
+}
+
+.btnContainer button:hover,
+.deleteContainer i:hover{
+    opacity: 0.8;
+    transition: all ease-in-out 0.3s;
+}
