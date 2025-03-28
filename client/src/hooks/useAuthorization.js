@@ -24,6 +24,7 @@ export const useAuth = () => {
         request: {
         get: requestWrapper.bind(null, "GET"),
         put: requestWrapper.bind(null, "PUT"),
+        patch: requestWrapper.bind(null, "PATCH"),
         post: requestWrapper.bind(null, "POST"),
         delete: requestWrapper.bind(null, "DELETE")
     }}
