@@ -29,17 +29,21 @@ export default function Header(){
 
             <Link key="home" to="/" className="text-sm/6 font-semibold text-gray-900">Home</Link>
             <Link key="catalog" to="/catalog" className="text-sm/6 font-semibold text-gray-900">Catalog</Link>
-            {isAuthenticated &&
-            <Link key="catalog-create" to="/catalog/create" className="text-sm/6 font-semibold text-gray-900">Create Post</Link>
-            }
             <Link key="about" to="/about" className="text-sm/6 font-semibold text-gray-900">About</Link>
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
 
             {isAuthenticated ?
-            <Link to="/profile" className="p-3 border-4 rounded-full border-blue-500 cursor-pointer hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in-out">
-              <i className="fa-solid fa-user"></i> 
-            </Link>
+            <div className="flex items-center space-x-5">
+              {location.pathname === '/catalog' && (
+                <Link key="catalog-create" to="/catalog/create" className="font-semibold text-white capitalize bg-blue-500 px-5 py-2 rounded-md hover:bg-blue-600 transition-all duration-300 ease-in-out">
+                  Create Post
+                </Link>  
+              )}
+              <Link to="/profile" className="p-3 border-4 rounded-full border-blue-500 cursor-pointer hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in-out">
+                <i className="fa-solid fa-user"></i> 
+              </Link>
+            </div>
             :
             <Link to={`/${isLogin}`} className="font-semibold text-white capitalize bg-blue-500 px-5 py-2 rounded-md hover:bg-blue-600 transition-all duration-300 ease-in-out">
               {isLogin}
