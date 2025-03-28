@@ -1,15 +1,16 @@
 import { Link, useNavigate } from "react-router";
-import { useLogout } from "../api/authApi";
-import { useUser } from "../api/userApi";
+import { useLogout, useUser } from "../api/authApi";
 import { useMyPosts } from "../api/catalogApi";
 import PostCard from "../components/Posts/PostCard/PostCard";
 import { useMyComments } from "../api/commentApi";
+import { useMyLikes } from "../api/likeApi";
 
 const Profile = () => {
     const {logout} = useLogout();
     const {user} = useUser();
     const {myPosts} = useMyPosts(user._id);
     const {myComments} = useMyComments(user._id);
+    const {myLikes} = useMyLikes()
     const navigation = useNavigate();
 
     const handleLogout = () => {
@@ -43,6 +44,7 @@ const Profile = () => {
     
                     <div className="flex space-x-6 mt-4">
                         <h2 className="text-gray-700"><span className="font-bold">{myPosts.length}</span> posts</h2>
+                        <h2 className="text-gray-700"><span className="font-bold">{myLikes}</span> likes</h2>
                         <h2 className="text-gray-700"><span className="font-bold">{myComments}</span> comments</h2>
                     </div>
     

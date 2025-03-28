@@ -27,6 +27,29 @@ export const useLikeCount = (postId) => {
 }
 
 
+export const useMyLikes = () => {
+    const {request, user_id} = useAuth()
+    const [myLikes, setMyLikes] = useState(0);
+
+    useEffect(() => {
+        const searchParams = new URLSearchParams({
+            where: `isLiked=true`,
+            load: "post=postId:posts", 
+        })
+
+        request.get(`${baseUrl}?${searchParams.toString()}`)
+        .then(res => {
+            const myLikedPosts = res.filter((like) => like.post._ownerId === user_id);
+            setMyLikes(myLikedPosts.length)
+        })
+    }, [])
+
+    return {
+        myLikes
+    }
+}
+
+
 export const useLikeStatus = (postId, userId) => {
     const {request} = useAuth()
     const [like, setLike] = useState(false);
