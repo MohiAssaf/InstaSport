@@ -1,4 +1,4 @@
-import PostCard from '../components/PostCard/PostCard';
+import PostCard from '../components/Posts/PostCard/PostCard';
 import { usePosts } from '../api/catalogApi';
 
 export default function Catalog() {
