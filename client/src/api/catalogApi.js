@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../hooks/useAuthorization";
 import requester from "../utils/requester";
+import { useAuth } from "../hooks/useAuthorization";
 
-const baseUrl = 'http://localhost:3030/data/posts';
+const baseUrl = `${import.meta.env.VITE_APP_SERVER_URL}/data/posts`;
+
 
 export const usePosts = () => {
     const {request} = useAuth()

@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
-import { useAuth } from "../context/AuthContext"
-import { useAuthorization } from "../hooks/useAuthorization"
 import requester from "../utils/requester"
+import { useAuthContext } from "../context/AuthContext"
+import { useAuth } from "../hooks/useAuthorization"
+import { useEffect, useState } from "react"
 
 
-const baseUrl = 'http://localhost:3030/users'
+const baseUrl = `${import.meta.env.VITE_APP_SERVER_URL}/users`
 
 export const useLogin = () => {
     const login = (userData) => {
@@ -25,10 +25,11 @@ export const useRegister = () => {
 }
 
 export const useLogout = () => {
-    const {request} = useAuthorization();
-    const {removeAccessToken} = useAuth();
+    const {request} = useAuth();
+    const {userLogout} = useAuthContext();
+
     const logout = () => {
-        removeAccessToken()
+        userLogout()
         return request.get(baseUrl)
     }
 
@@ -38,7 +39,7 @@ export const useLogout = () => {
 }
 
 export const useUser = () => {
-    const {request} = useAuthorization();
+    const {request} = useAuth();
     const [user, setUser] = useState({})
 
     useEffect(() => {

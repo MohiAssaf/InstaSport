@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuthorization";
 
-const baseUrl = 'http://localhost:3030/data/comments/';
+const baseUrl = `${import.meta.env.VITE_APP_SERVER_URL}/data/comments/`;
 
 
 
@@ -23,7 +23,8 @@ export const useComments = (post_Id) => {
     return {
         comments,
         addComment: (newComment) => setComments(state => [...state, newComment]),
-        editCommnet: (id, updatedComment) => setComments(state => state.map(comment => comment._id === id? updatedComment: comment))
+        editCommnet: (id, updatedComment) => setComments(state => state.map(comment => comment._id === id? updatedComment: comment)),
+        deleteComment: (id) => setComments(state => state.filter(comment => comment._id !== id))
     }
 }
 
@@ -72,5 +73,23 @@ export const useEditComment = () => {
 
     return {
         edit,
+    }
+}
+
+export const useDeleteComment = () => {
+    const {request} = useAuth();
+
+    const options = {
+        headers: {
+            'X-Admin': true
+        }
+    }
+
+    const delComment = (commentId) => {
+        return request.delete(`${baseUrl}/${commentId}`, null, options)
+    }
+
+    return {
+        delComment
     }
 }
