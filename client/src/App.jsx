@@ -18,7 +18,6 @@ import DetailsPost from './components/Posts/DetailsPost/DetailsPost'
 import CreatePost from './components/Posts/CreatePost/CreatePost'
 import EditPost from './components/Posts/EditPost/EditPost'
 
-import EditProfile from './components/EditProfile/EditProfile'
 
 import AuthProvider from './provider/AuthProvider'
 import './assets/css/index.css'
@@ -43,7 +42,6 @@ function App() {
 
             <Route element={<ProtectedRoute/>}>              
               <Route path='/profile' element={<Profile/>} />
-              <Route path='/profile/edit/' element={<EditProfile/>} />
 
               <Route path='/catalog/create' element={<CreatePost />} />
               <Route path='/catalog/details/:id' element={<DetailsPost/>}/>
