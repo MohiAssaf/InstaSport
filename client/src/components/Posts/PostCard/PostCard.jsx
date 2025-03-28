@@ -2,9 +2,14 @@ import { Link } from 'react-router';
 import postDateConvertAgo from '../../../utils/postDate';
 import styles from './PostCard.module.css';
 import { useAuth } from '../../../hooks/useAuthorization';
+import { useComments } from '../../../api/commentApi';
+import { useLikeCount } from '../../../api/likeApi';
 
 const PostCard = ({post}) => {
-  const {isAuthenticated} = useAuth()
+  const {isAuthenticated} = useAuth();
+  const {comments} = useComments(post._id);
+  const {postLikes} = useLikeCount(post._id)
+
   return (
     <>
       <div className={styles.postCard}>
@@ -14,10 +19,10 @@ const PostCard = ({post}) => {
           <div className={styles.btnsContainer}>
               <div className={styles.actionsContainer}>
                 <div className={styles.likeContainer}>
-                    <i className="fa-solid fa-heart"></i> {post.likesCount}
+                    <i className="fa-solid fa-heart"></i>  {postLikes}
                 </div>
                 <div className={styles.commentContainer}>
-                    <i className="fa-regular fa-comment"></i> {post.commentsCount}
+                    <i className="fa-regular fa-comment"></i> {comments.length}
                 </div>
               </div>
               <div>
