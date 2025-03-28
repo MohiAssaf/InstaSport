@@ -8,6 +8,7 @@ import { useComments, useCreateComment, useDeleteComment } from "../../../api/co
 import {v4 as demoId} from 'uuid'
 import { useUser } from "../../../api/authApi";
 import DeleteForm from "../../DeleteForm/DeleteForm";
+import { useLikeCount, useLikeStatus } from "../../../api/likeApi";
 
 const DetailsPost = () => {
     const { id } = useParams();
@@ -20,7 +21,8 @@ const DetailsPost = () => {
     const {comments, addComment, editCommnet, deleteComment} = useComments(id);
     const [optimisticComments, setOptimisticComment] = useOptimistic(comments, (state, newComment) => [...state, newComment]);
 
-    const [like, setLike] = useState(false);
+    const {postLikes, addLike, removeLike} = useLikeCount(id);
+    const {like, toggleLikeStatus} = useLikeStatus(id, user._id)
 
     const {delPost} = useDeletePost(); 
     const [delPostActive, setDelPostActive] = useState(false);
@@ -71,8 +73,14 @@ const DetailsPost = () => {
         nav('/catalog')
     }
 
-    const likeHandler = () => {
-        setLike(state => !state)
+    const likeHandler = async () => {
+        toggleLikeStatus();
+        if(like){
+            removeLike()
+        }else{
+            addLike()
+        } 
+        
     }
 
     
@@ -114,7 +122,7 @@ const DetailsPost = () => {
                                 <i 
                                 className={like ? "fa-solid fa-heart text-red-500 transition-colors cursor-pointer" : "fa-regular fa-heart transition-colors cursor-pointer"}
                                 onClick={likeHandler}>
-                                    <span>100</span>
+                                    <span>{postLikes}</span>
                                 </i> 
                                 <i className="fa-regular fa-comment"><span>{comments.length}</span></i>
                             </div>
