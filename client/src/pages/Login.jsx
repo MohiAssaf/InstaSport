@@ -4,12 +4,12 @@ import { useAuthContext } from "../context/AuthContext";
 import SubmitButton from "../components/SubmitButton/SubmitButton";
 import { useLogin } from "../api/authApi";
 import '../assets/css/form.css'
+import { toast } from "react-toastify";
 
 export default function Login(){
     const {login} = useLogin();
     const {userLogin} = useAuthContext()
     const navigate = useNavigate();
-    const [error, setError] = useState("");
 
     const submitAction = async (formData) => {
       const data = Object.fromEntries(formData);
@@ -17,11 +17,11 @@ export default function Login(){
       try {
         const result = await login(data);
         userLogin(result);
+        toast.success('Successfull Login!')
         navigate("/");
 
       } catch (error) {
-        setError(error.message);
-        setTimeout(() => setError(""), 3000);
+        toast.error(error.message)
       }
 
     }
@@ -30,8 +30,6 @@ export default function Login(){
           <div className="form-container">
             <h1 className="form-title">Login</h1>
 
-            {error && <p className="error-message">{error}</p>}
-            
             <form action={submitAction} className="form">
               <div className="form-group">
                   <label htmlFor="email" className="label">

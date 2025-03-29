@@ -30,7 +30,6 @@ export default function Header(){
             <Link key="home" to="/" className="text-sm/6 font-semibold text-gray-900">Home</Link>
             <Link key="catalog" to="/catalog" className="text-sm/6 font-semibold text-gray-900">Catalog</Link>
             <Link key="contact" to="/contact" className="text-sm/6 font-semibold text-gray-900">Contact</Link>
-            <Link key="about" to="/about" className="text-sm/6 font-semibold text-gray-900">About</Link>
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
 

@@ -5,28 +5,26 @@ import SubmitButton from "../components/SubmitButton/SubmitButton";
 import { useRegister } from "../api/authApi";
 import { useAuthContext } from "../context/AuthContext";
 import '../assets/css/form.css'
+import { toast } from "react-toastify";
 
 export default function Register() {
     const navigate = useNavigate();
     const {register} = useRegister();
-    const {userLogin} = useAuthContext();
-    const [error, setError] = useState("");
-    
+    const {userLogin} = useAuthContext();    
 
     const submitAction = async (formData) => {
       const data = Object.fromEntries(formData);
-      const errors = validatePassword(data.password, data.repeatPassword);
-
+      
       try {
+        validatePassword(data.password, data.repeatPassword);
+        
         const result = await register(data);
         userLogin(result);
+        toast.success(`Successful Registeration ${data.username}`)
         navigate("/");
 
       } catch (error) {
-        errors.push(error.message)
-        setError(errors.join(" "));
-        setTimeout(() => setError(""), 3000);
-        return;
+        toast.error(error.message);
       }
     }
 
@@ -34,8 +32,6 @@ export default function Register() {
       <div className="page">
         <div className="form-container">
           <h1 className="form-title">Register</h1>
-
-          {error && <p className="error-message">{error}</p>}
           
           <form action={submitAction} className="form">
             <div className="form-group">

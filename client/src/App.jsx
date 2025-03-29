@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router'
+import {ToastContainer} from 'react-toastify'
 
 import Home from './pages/Home'
 import Catalog from './pages/Catalog'
-import About from './pages/About'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Profile from './pages/Profile'
@@ -29,12 +29,22 @@ function App() {
   return (
     <AuthProvider>
       <div className="flex flex-col min-h-screen">
+        <ToastContainer
+          position="top-center"
+          autoClose={3000}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          />
         <Header />
 
           <Routes>
 
             <Route path='/' element={<Home />} />
-            <Route path='/about' element={<About />} />
             <Route path='/catalog' element={<Catalog />} />
             <Route path='/contact' element={<Contact />} />
 
