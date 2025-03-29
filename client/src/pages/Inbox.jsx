@@ -1,8 +1,15 @@
 import React from 'react';
-import { useGetInboxMess } from '../api/inboxApi';
+import { useGetInboxMess, useSolvedInboxMess } from '../api/inboxApi';
+import InboxItems from '../components/Inbox/InboxItem';
 
 const AdminInbox = () => {
-    const {messages} = useGetInboxMess()
+    const {messages, updateOnSolved} = useGetInboxMess();
+    const {solvedMessage} = useSolvedInboxMess();
+
+    const onSolved = async (messageId) => {
+        await solvedMessage(messageId)
+        updateOnSolved(messageId)
+    }
 
     return (
         <div className="min-h-screen bg-gray-50 p-40">
@@ -22,21 +29,11 @@ const AdminInbox = () => {
                         </thead>
                         <tbody>
                         {messages.map((message) => (
-                            <tr key={message.id} className="hover:bg-gray-50">
-                                <td className="px-6 py-4 text-sm text-gray-800 border-b">{message.name}</td>
-                                <td className="px-6 py-4 text-sm text-gray-800 border-b">{message.email}</td>
-                                <td className="px-6 py-4 text-sm text-gray-800 border-b">{message.username}</td>
-                                <td className="px-6 py-4 text-sm text-gray-800 border-b break-words">{message.message}</td>
-                                <td className="px-6 py-4 text-sm text-gray-800 flex justify-center items-center space-x-4 h-full">
-                                    <button className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 cursor-pointer">
-                                        Contact
-                                    </button>
-                                    <button className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 cursor-pointer">
-                                        Solved
-                                    </button>
-                                </td>
-                            </tr>
+                            <InboxItems key={message._id} 
+                            {...message} 
+                            onSolved={() => onSolved(message._id)}/>
                         ))}
+
                         </tbody>
                     </table>
                 </div>
