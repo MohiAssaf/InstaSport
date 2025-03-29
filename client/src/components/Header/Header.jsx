@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router";
 import { useAuth } from "../../hooks/useAuthorization";
 
 export default function Header(){
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated, isAdmin } = useAuth();
     const location = useLocation();
     const isLogin = location.pathname === '/login'? 'register': 'login'
 
@@ -29,6 +29,7 @@ export default function Header(){
 
             <Link key="home" to="/" className="text-sm/6 font-semibold text-gray-900">Home</Link>
             <Link key="catalog" to="/catalog" className="text-sm/6 font-semibold text-gray-900">Catalog</Link>
+            <Link key="contact" to="/contact" className="text-sm/6 font-semibold text-gray-900">Contact</Link>
             <Link key="about" to="/about" className="text-sm/6 font-semibold text-gray-900">About</Link>
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
@@ -40,6 +41,12 @@ export default function Header(){
                   Create Post
                 </Link>  
               )}
+              { isAdmin && (
+              <Link to="/inbox" className="p-3 border-4 rounded-full border-blue-500 cursor-pointer hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in-out">
+                <i className="fa-solid fa-inbox"></i>
+              </Link>
+              )
+              }
               <Link to="/profile" className="p-3 border-4 rounded-full border-blue-500 cursor-pointer hover:bg-blue-500 hover:text-white transition-all duration-300 ease-in-out">
                 <i className="fa-solid fa-user"></i> 
               </Link>

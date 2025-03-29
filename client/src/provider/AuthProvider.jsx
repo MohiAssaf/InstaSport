@@ -7,7 +7,7 @@ const AuthProvider = ({children}) => {
 
 
     const userLogin = (data) => {
-        setUserData({user_id: data._id, token: data.accessToken});
+        setUserData({user_id: data._id, token: data.accessToken, isAdmin: data?.isAdmin});
     }
 
     const userLogout = () => {

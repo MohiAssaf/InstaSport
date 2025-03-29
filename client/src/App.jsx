@@ -21,6 +21,8 @@ import EditPost from './components/Posts/EditPost/EditPost'
 
 import AuthProvider from './provider/AuthProvider'
 import './assets/css/index.css'
+import Contact from './pages/Contact'
+import AdminInbox from './pages/Inbox'
 
 function App() {
 
@@ -34,6 +36,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/about' element={<About />} />
             <Route path='/catalog' element={<Catalog />} />
+            <Route path='/contact' element={<Contact />} />
 
             <Route element={<UnprotectedRoute/>}>
               <Route path='/login' element={<Login />} />
@@ -46,6 +49,8 @@ function App() {
               <Route path='/catalog/create' element={<CreatePost />} />
               <Route path='/catalog/details/:id' element={<DetailsPost/>}/>
               <Route path='/catalog/edit/:id' element={<EditPost/>}/>
+
+              <Route path='/inbox' element={<AdminInbox/>}/>
             </Route>
 
             <Route path='*' element={<NotFound />}/>

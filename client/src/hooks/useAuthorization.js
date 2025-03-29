@@ -21,6 +21,7 @@ export const useAuth = () => {
     return {
         user_id: userData.user_id,
         isAuthenticated: !!userData.token,
+        isAdmin: userData?.isAdmin,
         request: {
         get: requestWrapper.bind(null, "GET"),
         put: requestWrapper.bind(null, "PUT"),
