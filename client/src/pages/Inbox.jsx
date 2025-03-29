@@ -1,14 +1,16 @@
 import React from 'react';
 import { useGetInboxMess, useSolvedInboxMess } from '../api/inboxApi';
 import InboxItems from '../components/Inbox/InboxItem';
+import { toast } from 'react-toastify';
 
 const AdminInbox = () => {
     const {messages, updateOnSolved} = useGetInboxMess();
     const {solvedMessage} = useSolvedInboxMess();
 
-    const onSolved = async (messageId) => {
+    const onSolved = async (messageId, username) => {
         await solvedMessage(messageId)
         updateOnSolved(messageId)
+        toast.success(`Solved the issue for ${username}`)
     }
 
     return (
@@ -31,7 +33,7 @@ const AdminInbox = () => {
                         {messages.map((message) => (
                             <InboxItems key={message._id} 
                             {...message} 
-                            onSolved={() => onSolved(message._id)}/>
+                            onSolved={() => onSolved(message._id, message.username)}/>
                         ))}
 
                         </tbody>

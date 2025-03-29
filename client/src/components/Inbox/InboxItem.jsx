@@ -8,7 +8,7 @@ const InboxItems = ({
 
     return (
         <tr className="hover:bg-gray-50">
-            <td className="px-6 py-4 text-sm text-gray-800 border-b">{name}</td>
+            <td className="px-6 py-4 text-sm text-gray-800 border-b">{name || 'No name provided'}</td>
             <td className="px-6 py-4 text-sm text-gray-800 border-b">{email}</td>
             <td className="px-6 py-4 text-sm text-gray-800 border-b">{username}</td>
             <td className="px-6 py-4 text-sm text-gray-800 border-b break-words">{message}</td>
