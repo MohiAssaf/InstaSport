@@ -2,11 +2,6 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuthorization";
 
 const baseUrl = `${import.meta.env.VITE_APP_SERVER_URL}/data/inbox`;
-const adminOptions = {
-    headers: {
-        'X-Admin': true
-    }
-}
 
 
 export const useGetInboxMess = () => {
@@ -27,13 +22,32 @@ export const useGetInboxMess = () => {
     }
 }
 
+
+export const useCreateInboxMess = () => {
+    const {request} = useAuth();
+    
+    const createMessage = (message) => {
+        return request.post(baseUrl, message)
+    }
+
+    return {
+        createMessage
+    }
+
+}
+
+
 export const useSolvedInboxMess = () => {
     const {request, isAdmin} = useAuth();
     
-    
+    const options = {
+        headers: {
+            'X-Admin': true
+        }
+    }
     const solvedMessage = (messageId) => {
         if(isAdmin){
-            return request.delete(`${baseUrl}/${messageId}`,null, adminOptions)
+            return request.delete(`${baseUrl}/${messageId}`,null, options)
         }
     }
 
