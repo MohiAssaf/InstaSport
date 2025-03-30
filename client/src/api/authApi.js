@@ -39,12 +39,14 @@ export const useLogout = () => {
 }
 
 export const useUser = () => {
-    const {request} = useAuth();
+    const {request, isAuthenticated} = useAuth();
     const [user, setUser] = useState({})
 
     useEffect(() => {
-        request.get(`${baseUrl}/me`)
-        .then(setUser)
+        if(isAuthenticated){
+            request.get(`${baseUrl}/me`)
+            .then(setUser)
+        }
     }, [])
 
 

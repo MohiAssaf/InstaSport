@@ -3,8 +3,10 @@ import { useCreateInboxMess } from '../api/inboxApi';
 import '../assets/css/form.css'
 import SubmitButton from '../components/SubmitButton/SubmitButton';
 import { toast } from 'react-toastify';
+import { useUser } from '../api/authApi';
 
 const Contact = () => {
+    const {user} = useUser();
     const navigate = useNavigate();
     const {createMessage} = useCreateInboxMess();
 
@@ -36,6 +38,7 @@ const Contact = () => {
                                 name="name"
                                 className="input-field"
                                 placeholder="Enter your Full Name"
+                                defaultValue={user?.name}
                             />
                         </div>
                         <div className="form-group w-full">
@@ -48,6 +51,7 @@ const Contact = () => {
                                 className="input-field"
                                 placeholder="Enter your email"
                                 autoComplete="email"
+                                defaultValue={user?.email}
                                 required
                             />
                         </div>
@@ -61,6 +65,7 @@ const Contact = () => {
                             name="username" 
                             className="input-field"
                             placeholder="Enter the username of the profile"
+                            defaultValue={user?.username}
                             required
                         />
                     </div>
