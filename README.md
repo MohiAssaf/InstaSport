@@ -59,9 +59,14 @@ cd InstaSport
 
 ✅ Backend deployed as a **Docker container** on **Google Cloud Platform (GCP)**
 
-### 🏅 Test Accounts:
+### Test Accounts:
+
+#### 👑 Admin Account:
+- **Email**: admin@abv.bg  
+  **Password**: admin
+
+#### 🏆 User Accounts:
 - **Email**: cr7@gmail.com  
   **Password**: Ronaldo-12
 - **Email**: messi@gmail.com  
   **Password**: Messi-12
-
