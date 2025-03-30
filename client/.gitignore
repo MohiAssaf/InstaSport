@@ -27,7 +27,4 @@ dist-ssr
 .env.production
 .env.development
 
-#firebase config files for deployment
-
 .firebaserc
-firebase.json
