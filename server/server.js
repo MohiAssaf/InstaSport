@@ -1363,24 +1363,24 @@
                 _id: "e94f51f7-6237-4f5a-ae68-188e139d97ba"
             },
             "a3b251f7-6237-4f5a-ae68-188e139d97ba": {
-                "name": "LeBron James",
-                "bio": "King of the NBA and chasing greatness",
-                "email": "lebron@gmail.com",
-                "username": "kingjames",
-                "profileImg": "https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png",
-                "hashedPassword": "a94d49b4008e4c391edc3ec0392d0ffcc3c302ab22c22caf83c68e6b4009a654",
-                "_createdOn": 1742589872356,
-                "_id": "a3b251f7-6237-4f5a-ae68-188e139d97ba"
+                name: "LeBron James",
+                bio: "King of the NBA and chasing greatness",
+                email: "lebron@gmail.com",
+                username: "kingjames",
+                profileImg: "https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png",
+                hashedPassword: "18779ad10e4d071caeb4cd1116a0714304ef654464e1571d2c39915e45154f32",
+                _createdOn: 1742589872356,
+                _id: "a3b251f7-6237-4f5a-ae68-188e139d97ba"
             },
             "c9e651f7-6237-4f5a-ae68-188e139d97ba": {
-                "name": "Tom Brady",
-                "bio": "7-time Super Bowl champion, the greatest quarterback ever",
-                "email": "brady@gmail.com",
-                "username": "tombrady",
-                "profileImg": "https://www.mensjournal.com/.image/t_share/MjExMTY2OTIzOTEwNTU1NjA3/new-york-giants-v-dallas-cowboys.jpg",
-                "hashedPassword": "e29b9496007e8c471edb3ec0392d0ffcc3c302ab22c22caf83c68e6b4009a656",
-                "_createdOn": 1742589872356,
-                "_id": "c9e651f7-6237-4f5a-ae68-188e139d97ba"
+                name: "Tom Brady",
+                bio: "7-time Super Bowl champion, the greatest quarterback ever",
+                email: "brady@gmail.com",
+                username: "tombrady",
+                profileImg: "https://www.mensjournal.com/.image/t_share/MjExMTY2OTIzOTEwNTU1NjA3/new-york-giants-v-dallas-cowboys.jpg",
+                hashedPassword: "f8cfcb1fcd27689537f5d93692611a71823bc57ade3e9b4061639954459617a5",
+                _createdOn: 1742589872356,
+                _id: "c9e651f7-6237-4f5a-ae68-188e139d97ba"
             }
     	},
     	sessions: {
