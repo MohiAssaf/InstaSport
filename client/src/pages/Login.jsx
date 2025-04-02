@@ -1,36 +1,49 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useAuthContext } from "../context/AuthContext";
-import SubmitButton from "../components/SubmitButton/SubmitButton";
 import { useLogin } from "../api/authApi";
 import '../assets/css/form.css'
 import { toast } from "react-toastify";
 
 export default function Login(){
     const {login} = useLogin();
-    const {userLogin} = useAuthContext()
+    const {userLogin} = useAuthContext();
     const navigate = useNavigate();
+    
+    const [disableSubmit, setDisableSubmit] = useState(false);
+    const [formData, setFormData] = useState({
+      email: "",
+      password: ""
+    })
 
-    const submitAction = async (formData) => {
-      const data = Object.fromEntries(formData);
+    const submitAction = async (e) => {
+      e.preventDefault()
+      setDisableSubmit(true)
 
       try {
-        const result = await login(data);
+        const result = await login(formData);
         userLogin(result);
         toast.success('Successfull Login!')
+        
         navigate("/");
 
       } catch (error) {
         toast.error(error.message)
+      }finally{
+        setDisableSubmit(false)
       }
 
+    }
+
+    const handleInputChange = (e) => {
+      setFormData(state => ({...state, [e.target.name]: e.target.value}))
     }
     return (
         <div className="page">
           <div className="form-container">
             <h1 className="form-title">Login</h1>
 
-            <form action={submitAction} className="form">
+            <form onSubmit={submitAction} className="form">
               <div className="form-group">
                   <label htmlFor="email" className="label">
                       Email
@@ -41,6 +54,8 @@ export default function Login(){
                   className="input-field"
                   placeholder="Enter a email"
                   autoComplete="email"
+                  onChange={handleInputChange}
+                  value={formData.email}
                   required
                   />
               </div>
@@ -53,12 +68,20 @@ export default function Login(){
                       name="password" 
                       className="input-field"
                       placeholder="Enter your password"
-                      autoComplete="password"
+                      autoComplete="current-password"
+                      onChange={handleInputChange}
+                      value={formData.password}
                       required
                   />
               </div>
     
-              <SubmitButton btnText="Login"/>
+              <button
+              disabled={disableSubmit}
+              type="submit"
+              className="px-10 py-2 text-xl text-white bg-blue-600 rounded-lg cursor-pointer hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+              >
+                Login
+              </button>
             </form>
     
             <div className="redirect-link-container">
