@@ -14,19 +14,29 @@ const requester = async (method, url, data, options={}) => {
         }
     }
 
-    const response = await fetch(url, options);
-    if(!response.headers.get("Content-Type")){
-        return
-    }
-
-    if(!response.ok){
-        const error = await response.json()
-        throw error;
+    try {
+        const response = await fetch(url, options);
+    
+        if (!response.ok) {
+            if (response.status === 403) {
+                throw new Error("Email or password don't match");
+            }
+            if (response.status === 409) {
+                throw new Error("A user with this email already exists");
+            }
+        }
+    
+        if (!response.headers.get("Content-Type")) {
+            return;
+        }
+    
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        throw new Error(error.message || 'Something went wrong, please try again later');
     }
     
-    const result = await response.json();
 
-    return result
 
 }
 
