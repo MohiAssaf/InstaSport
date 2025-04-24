@@ -2,12 +2,13 @@ import { Link } from "react-router";
 
 const NotFound = () => {
   return (
-    <div
-      className="relative bg-gray-200 min-h-screen flex items-center justify-center text-center bg-cover bg-center">
+    <div className="relative min-h-screen bg-gray-100 py-20 px-10 ml-[17%] flex-1">
       <div className="flex flex-col items-center justify-center space-y-6 px-4">
         <h1 className="text-[250px] font-bold text-black">
-            404
-        <span className="text-4xl font-sans text-gray-800">Page not found</span>
+          404
+          <span className="text-4xl font-sans text-gray-800">
+            Page not found
+          </span>
         </h1>
         <Link
           to="/"
