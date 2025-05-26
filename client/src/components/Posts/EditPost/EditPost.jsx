@@ -2,110 +2,113 @@ import { useNavigate, useParams } from "react-router";
 import { useEditPost, usePost } from "../../../api/catalogApi";
 import SubmitButton from "../../SubmitButton/SubmitButton";
 import { sportTypes } from "../../../constants/sportTypes";
-import '../../../assets/css/form.css'
 import { useEffect, useRef } from "react";
 
 const EditPost = () => {
-    const {id} = useParams();
-    const {post} = usePost(id);
-    const {edit} = useEditPost();
-    const nav = useNavigate();
-    const sportTypeRef = useRef();
+  const { id } = useParams();
+  const { post } = usePost(id);
+  const { edit } = useEditPost();
+  const nav = useNavigate();
+  const sportTypeRef = useRef();
 
-    useEffect(() => {
-        if(post.sportType){
-            sportTypeRef.current.value = post.sportType
-        }
-    }, [post])
-
-    const formAction = async (formData) => {
-        const data = Object.fromEntries(formData);
-
-        await edit(id, data);
-
-        nav(`/catalog/details/${id}`)
-
+  useEffect(() => {
+    if (post.sportType) {
+      sportTypeRef.current.value = post.sportType;
     }
+  }, [post]);
 
-  
-    return (        
-        <div className="page">
-            <div className="form-container">
-                    <h1 className="form-title">Edit Post</h1>
+  const formAction = async (formData) => {
+    const data = Object.fromEntries(formData);
 
-                    <form action={formAction} className="form" >
-                        <div className="form-group">
-                            <label 
-                            
-                            htmlFor="title"
-                            className="label"
-                            >
-                                Title
-                            </label>
-                            <input 
-                            type="text" 
-                            name="title" 
-                            placeholder="Enter the title of your post"
-                            className="input-field"
-                            defaultValue={post.title}
-                            required
-                            />
-                        </div>
+    await edit(id, data);
 
-                        <div className="form-group">
-                            <label 
-                            htmlFor="imageUrl"
-                            className="label"
-                            >
-                                Image
-                            </label>
-                            <input 
-                            type="url" 
-                            name="imageUrl" 
-                            placeholder="Paste an image URL..."
-                            className="input-field"
-                            defaultValue={post.imageUrl}
-                            required
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label 
-                            htmlFor="description"
-                            className="label"
-                            >
-                                Description
-                            </label>
-                            <textarea
-                            name="description"
-                            placeholder="A brief description of the post"
-                            className="input-field desc"
-                            defaultValue={post.description}
-                            >
-                            </textarea> 
-                        </div>
-                        <div className="form-group">
-                            <label 
-                            htmlFor="sportType"
-                            className="label"
-                            >
-                                Sport Type
-                            </label>
+    nav(`/catalog/details/${id}`);
+  };
 
-                            <select name="sportType" className="input-field" ref={sportTypeRef} required>
-                            <option key="none" value="">------</option>
-                                {sportTypes.map(sport => (
-                                    <option key={sport} value={sport}>{sport}</option>
-                                ))}
-                            </select>
-                            
-                        </div>
+  return (
+    <div className="relative min-h-full flex-grow flex justify-center items-center bg-gray-100 py-20 ml-[17%]">
+      <div className="max-w-[512px] w-full bg-white p-8 shadow-lg rounded-lg">
+        <h1 className="text-[30px] font-semibold text-center text-[#2d3748] mb-6">
+          Edit Post
+        </h1>
 
-                        <SubmitButton btnText="Edit" />
-    
-                    </form>
-                </div>
-        </div>
+        <form action={formAction} className="flex flex-col gap-6">
+          <div className="flex flex-col">
+            <label
+              htmlFor="title"
+              className="text-base text-[#4a5568] font-medium mb-2"
+            >
+              Title
+            </label>
+            <input
+              type="text"
+              name="title"
+              placeholder="Enter the title of your post"
+              className="w-full p-3 border-2 border-[#e2e8f0] rounded-md text-base text-[#4a5568] shadow-sm focus:border-[#3182ce] focus:outline-none focus:ring-2 focus:ring-[#4299e1]/50"
+              defaultValue={post.title}
+              required
+            />
+          </div>
 
+          <div className="flex flex-col">
+            <label
+              htmlFor="imageUrl"
+              className="text-base text-[#4a5568] font-medium mb-2"
+            >
+              Image
+            </label>
+            <input
+              type="url"
+              name="imageUrl"
+              placeholder="Paste an image URL..."
+              className="w-full p-3 border-2 border-[#e2e8f0] rounded-md text-base text-[#4a5568] shadow-sm focus:border-[#3182ce] focus:outline-none focus:ring-2 focus:ring-[#4299e1]/50"
+              defaultValue={post.imageUrl}
+              required
+            />
+          </div>
+          <div className="flex flex-col">
+            <label
+              htmlFor="description"
+              className="text-base text-[#4a5568] font-medium mb-2"
+            >
+              Description
+            </label>
+            <textarea
+              name="description"
+              placeholder="A brief description of the post"
+              className="p-3 min-h-[140px] resize-none border-2 border-[#e2e8f0] rounded-md shadow-sm  focus:border-[#3182ce] focus:outline-none focus:ring-2 focus:ring-[#4299e1]/50"
+              defaultValue={post.description}
+            ></textarea>
+          </div>
+          <div className="flex flex-col">
+            <label
+              htmlFor="sportType"
+              className="text-base text-[#4a5568] font-medium mb-2"
+            >
+              Sport Type
+            </label>
+
+            <select
+              name="sportType"
+              className="w-full p-3 border-2 border-[#e2e8f0] rounded-md text-base text-[#4a5568] shadow-sm focus:border-[#3182ce] focus:outline-none focus:ring-2 focus:ring-[#4299e1]/50"
+              ref={sportTypeRef}
+              required
+            >
+              <option key="none" value="">
+                ------
+              </option>
+              {sportTypes.map((sport) => (
+                <option key={sport} value={sport}>
+                  {sport}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <SubmitButton btnText="Edit" />
+        </form>
+      </div>
+    </div>
   );
 };
 

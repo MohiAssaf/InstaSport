@@ -7,7 +7,7 @@ export default function Posts() {
   return (
     <div className="relative min-h-screen bg-gray-100 py-20 px-10 ml-[17%]">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
           {posts.map((post) => (
             <PostCard key={post._id} post={post} />
           ))}
