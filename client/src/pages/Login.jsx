@@ -26,6 +26,7 @@ export default function Login() {
 
       navigate("/");
     } catch (error) {
+      console.log(error);
       toast.error(error.message);
     } finally {
       setDisableSubmit(false);

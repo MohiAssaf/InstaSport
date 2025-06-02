@@ -1,5 +1,5 @@
-import PostCard from "../components/Posts/PostCard/PostCard";
-import { usePosts } from "../api/catalogApi";
+import { usePosts } from "../api/postsApi";
+import PostCard from "../components/Posts/PostCard";
 
 export default function Posts() {
   const { posts } = usePosts();

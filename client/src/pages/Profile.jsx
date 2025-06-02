@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router";
 import { useLogout, useUser } from "../api/authApi";
-import { useMyPosts } from "../api/catalogApi";
-import PostCard from "../components/Posts/PostCard/PostCard";
+import { useMyPosts } from "../api/postsApi";
+import PostCard from "../components/Posts/PostCard";
 import { useMyComments } from "../api/commentApi";
 import { useMyLikes } from "../api/likeApi";
 
@@ -71,7 +71,7 @@ const Profile = () => {
         </div>
       </div>
 
-      <div className="mt-12 max-w-5xl mx-auto bg-white p-10">
+      <div className="mt-12 max-w-6xl mx-auto bg-white p-10">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
           My Posts
         </h2>
@@ -84,7 +84,7 @@ const Profile = () => {
                 You don't have any posts &#128533;
               </h1>
               <Link
-                to="/catalog/create"
+                to="/posts/create"
                 className="bg-blue-500 text-white text-x px-5 py-3 rounded-lg font-medium hover:bg-blue-600 transition-colors duration-300"
               >
                 {" "}
