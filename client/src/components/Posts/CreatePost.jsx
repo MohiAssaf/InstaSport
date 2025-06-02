@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
-import SubmitButton from "../../SubmitButton/SubmitButton";
-import { useCreatePost } from "../../../api/catalogApi";
-import { sportTypes } from "../../../constants/sportTypes";
+import SubmitButton from "../SubmitButton/SubmitButton";
+import { useCreatePost } from "../../api/postsApi";
+import { sportTypes } from "../../constants/sportTypes";
 
 const CreatePost = () => {
   const { createPost } = useCreatePost();
@@ -10,7 +10,7 @@ const CreatePost = () => {
   const formAction = async (formData) => {
     const data = Object.fromEntries(formData);
     await createPost(data);
-    nav("/catalog");
+    nav("/posts");
   };
 
   return (

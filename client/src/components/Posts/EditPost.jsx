@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router";
-import { useEditPost, usePost } from "../../../api/catalogApi";
-import SubmitButton from "../../SubmitButton/SubmitButton";
-import { sportTypes } from "../../../constants/sportTypes";
+import { useEditPost, usePost } from "../../api/postsApi";
+import SubmitButton from "../SubmitButton/SubmitButton";
+import { sportTypes } from "../../constants/sportTypes";
 import { useEffect, useRef } from "react";
 
 const EditPost = () => {
@@ -22,7 +22,7 @@ const EditPost = () => {
 
     await edit(id, data);
 
-    nav(`/catalog/details/${id}`);
+    nav(`/posts/details/${id}`);
   };
 
   return (

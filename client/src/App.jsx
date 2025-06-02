@@ -13,9 +13,9 @@ import Header from "./components//Header/Header";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import UnprotectedRoute from "./routes/UnprotectedRoute";
 
-import DetailsPost from "./components/Posts/DetailsPost/DetailsPost";
-import CreatePost from "./components/Posts/CreatePost/CreatePost";
-import EditPost from "./components/Posts/EditPost/EditPost";
+import DetailsPost from "./components/Posts/DetailsPost";
+import CreatePost from "./components/Posts/CreatePost";
+import EditPost from "./components/Posts/EditPost";
 
 import AuthProvider from "./provider/AuthProvider";
 import "./assets/css/index.css";
